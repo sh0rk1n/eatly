@@ -1,36 +1,24 @@
-import React, { ChangeEvent, memo, useEffect, useState } from "react";
+import React, { ChangeEvent, memo, useEffect } from "react";
 import styles from "src/pages/Login/ui/MainPage.module.scss";
-import axios from "axios";
-import { API_URL } from "src/shared/api/api";
+import { fetchUsers } from "src/shared/api/api";
+import { useStore } from "src/app/providers/store";
 
 export const Login = memo(() => {
-  const [login, setLogin] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [users, setUsers] = useState([]);
-  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const { login, password, users, isAuth, setLogin, setPassword, setIsAuth } =
+    useStore();
 
   useEffect(() => {
-    // TODO: деструктуризировать
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get(API_URL);
-        const userData = response.data[0].users;
-        setUsers(userData);
-      } catch (err) {
-        console.warn("Ошибка загрузки пользователей:", err);
-      }
-    };
-    fetchUsers();
+    fetchUsers().then((userData) => {
+      useStore.getState().setUsers(userData);
+    });
   }, []);
 
   const addLogin = (e: ChangeEvent<HTMLInputElement>) => {
     setLogin(e.target.value);
-    console.log(login);
   };
 
   const addPassword = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-    console.log(password);
   };
 
   const handleLogin = () => {

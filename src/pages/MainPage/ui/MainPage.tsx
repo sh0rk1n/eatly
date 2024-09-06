@@ -1,5 +1,5 @@
 import React from "react";
 
 export const MainPage = () => {
-  return <div>МОЛОДЕЦ! ТЫ АВТОРИЗОВАН</div>;
+  return <h1>Добро пожаловать на главную страницу!</h1>;
 };
