@@ -1,3 +1,3 @@
-import { useStore } from "./store";
+import { useStore } from "./user";
 
 export { useStore };

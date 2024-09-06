@@ -1,12 +1,12 @@
 import React, { ChangeEvent, memo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchUsers } from "src/shared/api/api";
+import { fetchUsers } from "src/shared/api/axios";
 import { useStore } from "src/app/providers/store";
 import styles from "src/pages/Login/ui/Login.module.scss";
 import { Button, ButtonSize, ButtonTheme } from "src/shared/ui/Button/Button";
 
 export const Login = memo(() => {
-  const { login, password, users, setLogin, setPassword, setIsAuth } =
+  const { users, login, password, setLogin, setPassword, setIsAuth } =
     useStore();
   const navigate = useNavigate();
 
@@ -15,14 +15,6 @@ export const Login = memo(() => {
     fetchUsers().then((userData) => {
       useStore.getState().setUsers(userData);
     });
-  }, []);
-
-  useEffect(() => {
-    const storageAuth = localStorage.getItem("isAuth");
-    if (storageAuth === "true") {
-      setIsAuth(true);
-      navigate("/");
-    }
   }, []);
 
   const addLogin = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +39,8 @@ export const Login = memo(() => {
     }
   };
 
+  const handleRegister = () => {};
+
   return (
     <div className={styles.root}>
       <h1>ВХОД В АККАУНТ</h1>
@@ -62,14 +56,27 @@ export const Login = memo(() => {
           value={password}
         />
       </div>
-      <Button
-        className={styles.button}
-        theme={ButtonTheme.BLUE}
-        size={ButtonSize.L}
-        onClick={handleLogin}
-      >
-        ВОЙТИ
-      </Button>
+      <div className={styles.buttons}>
+        <Button
+          className={styles.buttonLogin}
+          theme={ButtonTheme.BLUE}
+          size={ButtonSize.L}
+          onClick={handleLogin}
+        >
+          ВОЙТИ
+        </Button>
+        <div>
+          <p>НОВИЧОК??? ЗАРЕГИСТРИРУЙСЯ!</p>
+          <Button
+            className={styles.buttonRegister}
+            theme={ButtonTheme.RED}
+            size={ButtonSize.XL}
+            onClick={handleRegister}
+          >
+            ЗАРЕГИСТРИРОВАТЬСЯ
+          </Button>
+        </div>
+      </div>
     </div>
   );
 });

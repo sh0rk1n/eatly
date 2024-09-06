@@ -13,6 +13,19 @@
   }
 }
 
-.button {
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+
+  p {
+    color: white;
+    font-size: 12px;
+  }
+}
+
+.buttonLogin,
+.buttonRegister {
   margin: 1rem 0;
 }
+
