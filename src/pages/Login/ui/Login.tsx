@@ -1,16 +1,28 @@
 import React, { ChangeEvent, memo, useEffect } from "react";
-import styles from "src/pages/Login/ui/MainPage.module.scss";
+import { useNavigate } from "react-router-dom";
 import { fetchUsers } from "src/shared/api/api";
 import { useStore } from "src/app/providers/store";
+import styles from "src/pages/Login/ui/Login.module.scss";
+import { Button, ButtonSize, ButtonTheme } from "src/shared/ui/Button/Button";
 
 export const Login = memo(() => {
-  const { login, password, users, isAuth, setLogin, setPassword, setIsAuth } =
+  const { login, password, users, setLogin, setPassword, setIsAuth } =
     useStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    // запрос к бэку на получение User[]
     fetchUsers().then((userData) => {
       useStore.getState().setUsers(userData);
     });
+  }, []);
+
+  useEffect(() => {
+    const storageAuth = localStorage.getItem("isAuth");
+    if (storageAuth === "true") {
+      setIsAuth(true);
+      navigate("/");
+    }
   }, []);
 
   const addLogin = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,6 +40,8 @@ export const Login = memo(() => {
 
     if (currentUser) {
       setIsAuth(true);
+      localStorage.setItem("isAuth", "true");
+      navigate("/");
     } else {
       alert("Неправильный логин или пароль");
     }
@@ -35,28 +49,27 @@ export const Login = memo(() => {
 
   return (
     <div className={styles.root}>
-      {isAuth ? (
-        <div>ВЫ УСПЕШНО ВОШЛИ В АККАУНТ</div>
-      ) : (
-        <>
-          <h1>ВХОД В АККАУНТ</h1>
-          <div className={styles.inputs}>
-            <input
-              placeholder="ВВЕДИТЕ ЛОГИН: "
-              onChange={addLogin}
-              value={login}
-            />
-            <input
-              placeholder="ВВЕДИТЕ ПАРОЛЬ: "
-              onChange={addPassword}
-              value={password}
-            />
-          </div>
-          <button className={styles.button} onClick={handleLogin}>
-            ВОЙТИ
-          </button>
-        </>
-      )}
+      <h1>ВХОД В АККАУНТ</h1>
+      <div className={styles.inputs}>
+        <input
+          placeholder="ВВЕДИТЕ ЛОГИН: "
+          onChange={addLogin}
+          value={login}
+        />
+        <input
+          placeholder="ВВЕДИТЕ ПАРОЛЬ: "
+          onChange={addPassword}
+          value={password}
+        />
+      </div>
+      <Button
+        className={styles.button}
+        theme={ButtonTheme.BLUE}
+        size={ButtonSize.L}
+        onClick={handleLogin}
+      >
+        ВОЙТИ
+      </Button>
     </div>
   );
 });
