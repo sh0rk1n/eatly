@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import { AuthDto } from "src/features/AuthByUsername/model/schemas/auth.schemas";
@@ -7,24 +7,65 @@ import { useUserStore } from "src/app/providers/store";
 import { Button, ButtonSize, ButtonTheme } from "src/shared/ui/Button/Button";
 import { Input } from "src/shared/ui/Input/Input";
 import styles from "src/pages/Login/ui/Login.module.scss";
+import { axiosInstance } from "src/shared/api/axios";
 
 export const LoginForm = memo(() => {
-  const { login } = useUserStore();
+  const { login, logout, isAuth } = useUserStore();
+  const { control, handleSubmit, resetField } = useForm<AuthDto>();
   const navigate = useNavigate();
 
-  const { control, handleSubmit } = useForm<AuthDto>();
+  useEffect(() => {
+    const checkAuth = async () => {
+      if (!isAuth) return;
 
-  const handleLogin = async (data: AuthDto) => {
-    try {
-      const res = await authService.login(data);
-
-      if (res?.token) {
-        localStorage.setItem("token", res.token);
-      } else {
-        console.error("Токен не был получен в ответе.");
+      try {
+        const { data } = await axiosInstance.get("/auth_me", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        login(data);
+      } catch (e) {
+        logout();
       }
+    };
+    void checkAuth();
+  }, [isAuth]);
 
-      login(data);
+  useEffect(() => {
+    const checkIsAuth = async () => {
+      try {
+        const { data } = await axiosInstance.get("/auth_me", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        login(data);
+      } catch (e) {
+        logout();
+      }
+    };
+    void checkIsAuth();
+  }, []);
+
+  const handleLogin = async (formData: AuthDto) => {
+    if (formData.name) {
+      try {
+        const { data } = await axiosInstance.post("/register", formData);
+
+        login(formData);
+        localStorage.setItem("token", data.token);
+      } catch (error) {
+        console.log(error);
+      }
+      return;
+    }
+
+    try {
+      const { data } = await axiosInstance.post("/auth", formData);
+
+      login(formData);
+      localStorage.setItem("token", data.token);
       navigate("/");
     } catch (error) {
       console.error("Ошибка авторизации", error);
@@ -38,7 +79,7 @@ export const LoginForm = memo(() => {
         <div className={styles.inputs}>
           <Controller
             control={control}
-            name="username"
+            name="email"
             render={({ field }) => (
               <Input placeholder={"ВВЕДИТЕ ЛОГИН: "} {...field} />
             )}
