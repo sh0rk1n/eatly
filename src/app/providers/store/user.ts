@@ -1,14 +1,14 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { User } from "src/features/AuthByUsername/model/schemas/user.schemas";
+import { AuthDto } from "src/features/AuthByUsername/model/schemas/auth.schemas";
 
 interface UserState {
-  user?: User;
+  user?: AuthDto;
+  isAuth: boolean;
 }
 
 interface UserActions {
-  setUser: (user: User | undefined) => void;
-  login: (user: User) => void;
+  login: (user: AuthDto) => void;
   logout: () => void;
 }
 
@@ -17,10 +17,10 @@ type UserStore = UserState & UserActions;
 export const useUserStore = create<UserStore>()(
   persist(
     devtools((set) => ({
-      users: [],
-      setUser: (user: User | undefined) => set({ user }),
-      login: (user) => set({ user }),
-      logout: () => set({}),
+      users: undefined,
+      isAuth: false,
+      login: (user) => set({ user, isAuth: true }),
+      logout: () => set({ user: undefined, isAuth: false }),
     })),
     {
       name: "user-store",

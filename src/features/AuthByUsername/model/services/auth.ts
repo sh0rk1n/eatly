@@ -1,11 +1,9 @@
-import { LoginDto } from "src/features/AuthByUsername/model/schemas/login.schemas";
-import axios from "axios";
-import { API_URL } from "src/shared/api/api";
-import { User } from "src/features/AuthByUsername/model/schemas/user.schemas";
+import { axiosInstance } from "src/shared/api/axios";
+import { AuthDto } from "src/features/AuthByUsername/model/schemas/auth.schemas";
 
 class AuthService {
-  async login(dto: LoginDto) {
-    const res = await axios.post<User | undefined>(`${API_URL}/login`, dto);
+  async login(dto: AuthDto) {
+    const res = await axiosInstance.post<AuthDto | undefined>(`/login`, dto);
     return res.data;
   }
 }

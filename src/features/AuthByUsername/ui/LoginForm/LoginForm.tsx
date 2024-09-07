@@ -1,69 +1,65 @@
-import React, { ChangeEvent, memo, useState } from "react";
-import styles from "src/pages/Login/ui/Login.module.scss";
-import { Button, ButtonSize, ButtonTheme } from "src/shared/ui/Button/Button";
-import { LoginDto } from "src/features/AuthByUsername/model/schemas/login.schemas";
+import React, { memo } from "react";
+import { useNavigate } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
+import { AuthDto } from "src/features/AuthByUsername/model/schemas/auth.schemas";
 import { authService } from "src/features/AuthByUsername/model/services/auth";
 import { useUserStore } from "src/app/providers/store";
-import { useNavigate } from "react-router-dom";
+import { Button, ButtonSize, ButtonTheme } from "src/shared/ui/Button/Button";
 import { Input } from "src/shared/ui/Input/Input";
+import styles from "src/pages/Login/ui/Login.module.scss";
 
 export const LoginForm = memo(() => {
-  const { setUser } = useUserStore();
+  const { login } = useUserStore();
   const navigate = useNavigate();
 
-  const [login, setLogin] = useState(""); // пока заглушки, позже уберу
-  const [password, setPassword] = useState(""); // пока заглушки, позже уберу
+  const { control, handleSubmit } = useForm<AuthDto>();
 
-  const onChangeUsername = (value: string) => {
-    setLogin(value);
-  };
-
-  const OnChangePassword = (value: string) => {
-    setPassword(value);
-  };
-
-  const handleLogin = async () => {
-    const dto: LoginDto = {
-      name: login,
-      password,
-    };
+  const handleLogin = async (data: AuthDto) => {
     try {
-      const currentUser = await authService.login(dto);
-      if (currentUser) {
-        setUser(currentUser);
-        localStorage.setItem("isAuth", "true");
-        navigate("/");
+      const res = await authService.login(data);
+
+      if (res?.token) {
+        localStorage.setItem("token", res.token);
       } else {
-        alert("Неправильный логин или пароль");
+        console.error("Токен не был получен в ответе.");
       }
-    } catch (err) {
-      console.error("Ошибка авторизации", err);
+
+      login(data);
+      navigate("/");
+    } catch (error) {
+      console.error("Ошибка авторизации", error);
     }
   };
 
   return (
     <>
       <h1>ВХОД В АККАУНТ</h1>
-      <div className={styles.inputs}>
-        <Input
-          placeholder="ВВЕДИТЕ ЛОГИН: "
-          onChange={onChangeUsername}
-          value={login}
-        />
-        <Input
-          placeholder="ВВЕДИТЕ ПАРОЛЬ: "
-          onChange={OnChangePassword}
-          value={password}
-        />
-      </div>
-      <Button
-        className={styles.buttonLogin}
-        theme={ButtonTheme.BLUE}
-        size={ButtonSize.L}
-        onClick={handleLogin}
-      >
-        ВОЙТИ
-      </Button>
+      <form onSubmit={handleSubmit(handleLogin)}>
+        <div className={styles.inputs}>
+          <Controller
+            control={control}
+            name="username"
+            render={({ field }) => (
+              <Input placeholder={"ВВЕДИТЕ ЛОГИН: "} {...field} />
+            )}
+          />
+          <Controller
+            control={control}
+            name="password"
+            render={({ field }) => (
+              <Input placeholder={"ВВЕДИТЕ ПАРОЛЬ"} {...field} />
+            )}
+          />
+        </div>
+        <Button
+          className={styles.buttonLogin}
+          theme={ButtonTheme.BLUE}
+          size={ButtonSize.L}
+          type="submit"
+        >
+          ВОЙТИ
+        </Button>
+      </form>
     </>
   );
 });
