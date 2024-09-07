@@ -25,10 +25,10 @@ export const Button = memo((props: ButtonProps) => {
   const { className, theme, size, disabled, children, ...otherProps } = props;
 
   const buttonClasses = [styles.button];
-  if (className) buttonClasses.push(className);
-  if (theme) buttonClasses.push(styles[theme]);
-  if (size) buttonClasses.push(styles[size]);
-  if (disabled) buttonClasses.push(styles.disabled);
+  className && buttonClasses.push(className);
+  theme && buttonClasses.push(styles[theme]);
+  size && buttonClasses.push(styles[size]);
+  disabled && buttonClasses.push(styles.disabled);
 
   return (
     <button

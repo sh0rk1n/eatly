@@ -1,7 +1,7 @@
 import { RouteProps } from "react-router-dom";
-import { NotFoundPage } from "src/pages/NotFoundPage";
-import { ProfilePage } from "src/pages/ProfilePage";
-import { HomePage } from "src/pages/HomePage";
+import { NotFoundPage } from "src/pages/NotFound";
+import { ProfilePage } from "src/pages/Profile";
+import { HomePage } from "src/pages/Home";
 import { Login } from "src/pages/Login";
 
 export type AppRoutesProps = RouteProps & {

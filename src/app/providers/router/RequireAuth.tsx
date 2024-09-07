@@ -1,13 +1,13 @@
 import React from "react";
-import { useStore } from "src/app/providers/store";
 import { Navigate, useLocation } from "react-router-dom";
 import { RoutePath } from "src/shared/config/routeConfig/routeConfig";
+import { useUserStore } from "src/app/providers/store";
 
 export const RequireAuth = ({ children }: { children: JSX.Element }) => {
-  const { isAuth } = useStore();
+  const { user } = useUserStore();
   const location = useLocation();
 
-  if (!isAuth) {
+  if (!user) {
     return <Navigate to={RoutePath.login} state={{ from: location }} replace />;
   }
 

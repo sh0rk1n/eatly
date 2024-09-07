@@ -1,53 +1,29 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
-
-type User = {
-  id: string;
-  username: string;
-  password: string;
-  role: string;
-};
+import { devtools, persist } from "zustand/middleware";
+import { User } from "src/features/AuthByUsername/model/schemas/user.schemas";
 
 interface UserState {
-  login: string;
-  password: string;
-  users: User[];
-  isAuth: boolean;
-  setLogin: (value: string) => void;
-  setPassword: (value: string) => void;
-  setUsers: (users: User[]) => void;
-  setIsAuth: (isAuth: boolean) => void;
-  // register maybe нужно под него новый файл создать ???
-  newUsername: string;
-  setNewUsername: (newUsername: string) => void;
-  newPassword: string;
-  setNewPassword: (newPassword: string) => void;
+  user?: User;
 }
 
-export const useStore = create<UserState>()(
+interface UserActions {
+  setUser: (user: User | undefined) => void;
+  login: (user: User) => void;
+  logout: () => void;
+}
+
+type UserStore = UserState & UserActions;
+
+export const useUserStore = create<UserStore>()(
   persist(
-    (set) => ({
+    devtools((set) => ({
       users: [],
-      login: "",
-      password: "",
-      isAuth: false,
-      setIsAuth: (isAuth) => set({ isAuth }),
-      setLogin: (login) => set({ login }),
-      setPassword: (password) => set({ password }),
-      setUsers: (users) => set({ users }),
-      newUsername: "",
-      setNewUsername: (newUsername) => set({ newUsername }),
-      newPassword: "",
-      setNewPassword: (newPassword) => set({ newPassword }),
-    }),
+      setUser: (user: User | undefined) => set({ user }),
+      login: (user) => set({ user }),
+      logout: () => set({}),
+    })),
     {
       name: "user-store",
-      onRehydrateStorage: (state) => {
-        const storageAuth = localStorage.getItem("isAuth");
-        if (storageAuth === "true") {
-          state.isAuth = true;
-        }
-      },
     },
   ),
 );
