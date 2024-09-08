@@ -1,8 +1,7 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import { AuthDto } from "src/features/AuthByUsername/model/schemas/auth.schemas";
-import { authService } from "src/features/AuthByUsername/model/services/auth";
 import { useUserStore } from "src/app/providers/store";
 import { Button, ButtonSize, ButtonTheme } from "src/shared/ui/Button/Button";
 import { Input } from "src/shared/ui/Input/Input";
@@ -10,10 +9,13 @@ import styles from "src/pages/Login/ui/Login.module.scss";
 import { axiosInstance } from "src/shared/api/axios";
 
 export const LoginForm = memo(() => {
-  const { login, logout, isAuth } = useUserStore();
-  const { control, handleSubmit, resetField } = useForm<AuthDto>();
+  const { login, logout, isAuth, setIsAuth } = useUserStore();
+  const [isLogin, setIsLogin] = useState(true);
+
+  const { control, handleSubmit, reset } = useForm<AuthDto>();
   const navigate = useNavigate();
 
+  // TODO: деструктуризировать axiosInstance, sign UP
   useEffect(() => {
     const checkAuth = async () => {
       if (!isAuth) return;
@@ -26,6 +28,7 @@ export const LoginForm = memo(() => {
         });
         login(data);
       } catch (e) {
+        console.log("Ошибка в авторизации!", e);
         logout();
       }
     };
@@ -42,6 +45,7 @@ export const LoginForm = memo(() => {
         });
         login(data);
       } catch (e) {
+        console.log("Ошибка в ПРОВЕРКЕ авторизации!", e);
         logout();
       }
     };
@@ -53,10 +57,12 @@ export const LoginForm = memo(() => {
       try {
         const { data } = await axiosInstance.post("/register", formData);
 
-        login(formData);
+        setIsAuth(true);
         localStorage.setItem("token", data.token);
+        //
+        setIsLogin(true);
       } catch (error) {
-        console.log(error);
+        console.log("Ошибка в регистрации", error);
       }
       return;
     }
@@ -64,42 +70,104 @@ export const LoginForm = memo(() => {
     try {
       const { data } = await axiosInstance.post("/auth", formData);
 
-      login(formData);
+      setIsAuth(true);
       localStorage.setItem("token", data.token);
       navigate("/");
     } catch (error) {
-      console.error("Ошибка авторизации", error);
+      console.error("Ошибка email/password", error);
     }
+    reset();
   };
 
   return (
     <>
-      <h1>ВХОД В АККАУНТ</h1>
+      <h1>{isLogin ? "ВХОД В АККАУНТ" : "РЕГИСТРАЦИЯ"}</h1>
       <form onSubmit={handleSubmit(handleLogin)}>
-        <div className={styles.inputs}>
-          <Controller
-            control={control}
-            name="email"
-            render={({ field }) => (
-              <Input placeholder={"ВВЕДИТЕ ЛОГИН: "} {...field} />
-            )}
-          />
-          <Controller
-            control={control}
-            name="password"
-            render={({ field }) => (
-              <Input placeholder={"ВВЕДИТЕ ПАРОЛЬ"} {...field} />
-            )}
-          />
-        </div>
-        <Button
-          className={styles.buttonLogin}
-          theme={ButtonTheme.BLUE}
-          size={ButtonSize.L}
-          type="submit"
-        >
-          ВОЙТИ
-        </Button>
+        {isLogin && (
+          <div className={styles.inputs}>
+            <Controller
+              control={control}
+              name="email"
+              render={({ field }) => (
+                <Input placeholder={"ВВЕДИТЕ ЛОГИН: "} {...field} />
+              )}
+            />
+            <Controller
+              control={control}
+              name="password"
+              render={({ field }) => (
+                <Input placeholder={"ВВЕДИТЕ ПАРОЛЬ"} {...field} />
+              )}
+            />
+          </div>
+        )}
+
+        {!isLogin && (
+          <div className={styles.inputs}>
+            <Controller
+              control={control}
+              render={({ field }) => (
+                <Input placeholder={"ВВЕДИТЕ ИМЯ: "} {...field} />
+              )}
+              name={"name"}
+            />
+            <Controller
+              control={control}
+              render={({ field }) => (
+                <Input placeholder={"ВВЕДИТЕ ПОЧТУ: "} {...field} />
+              )}
+              name={"email"}
+            />
+            <Controller
+              control={control}
+              render={({ field }) => (
+                <Input placeholder={"ВВЕДИТЕ ПАРОЛЬ: "} {...field} />
+              )}
+              name={"password"}
+            />
+          </div>
+        )}
+        {isLogin ? (
+          <>
+            <Button
+              className={styles.buttonLogin}
+              theme={ButtonTheme.BLUE}
+              size={ButtonSize.L}
+              type="submit"
+            >
+              ВОЙТИ
+            </Button>
+            <p>НОВИЧОК??? ЗАРЕГИСТРИРУЙСЯ!</p>
+            <Button
+              className={styles.buttonRegister}
+              theme={ButtonTheme.RED}
+              size={ButtonSize.XL}
+              onClick={() => setIsLogin(false)}
+            >
+              ЗАРЕГИСТРИРОВАТЬСЯ
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              className={styles.buttonRegister}
+              theme={ButtonTheme.RED}
+              size={ButtonSize.XL}
+              type="submit"
+            >
+              ЗАРЕГИСТРИРОВАТЬСЯ
+            </Button>
+            <p>УЖЕ ЕСТЬ АККАУНТ? ВОЙДИТЕ!</p>
+            <Button
+              className={styles.buttonLogin}
+              theme={ButtonTheme.BLUE}
+              size={ButtonSize.L}
+              onClick={() => setIsLogin(true)}
+            >
+              ВОЙТИ
+            </Button>
+          </>
+        )}
       </form>
     </>
   );
