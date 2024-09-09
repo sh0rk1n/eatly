@@ -4,10 +4,10 @@ import { RoutePath } from "shared/config/routeConfig/routeConfig";
 import { useUserStore } from "app/providers/store";
 
 export const RequireAuth = ({ children }: { children: JSX.Element }) => {
-  const { isAuth } = useUserStore();
+  const { user } = useUserStore();
   const location = useLocation();
 
-  if (!isAuth) {
+  if (!user) {
     return <Navigate to={RoutePath.login} state={{ from: location }} replace />;
   }
 

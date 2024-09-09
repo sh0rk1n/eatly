@@ -1,81 +1,60 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
-import { AuthDto } from "features/AuthByUsername/model/schemas/auth.schemas";
 import { useUserStore } from "app/providers/store";
+import { authService } from "features/AuthByUsername/model/services/auth";
+import { AuthDto } from "features/AuthByUsername/model/schemas/auth.schemas";
 import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
 import styles from "pages/Login/ui/Login.module.scss";
-import { axiosInstance } from "shared/api/axios";
 
 export const LoginForm = memo(() => {
-  const { login, logout, isAuth, setIsAuth } = useUserStore();
-  const [isLogin, setIsLogin] = useState(true);
-
+  const { login, logout, user } = useUserStore();
+  const [isLogin, setIsLogin] = useState(true); // TODO: убрать
   const { control, handleSubmit, reset } = useForm<AuthDto>();
   const navigate = useNavigate();
 
-  // TODO: деструктуризировать axiosInstance, sign UP
-  useEffect(() => {
-    const checkAuth = async () => {
-      if (!isAuth) return;
+  const checkAuth = useCallback(async () => {
+    if (!user) return;
 
-      try {
-        const { data } = await axiosInstance.get("/auth_me", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-        login(data);
-      } catch (e) {
-        console.log("Ошибка в авторизации!", e);
-        logout();
-      }
-    };
-    void checkAuth();
-  }, [isAuth]);
+    try {
+      const authMe = await authService.getAuthMe();
+      // eslint-disable-next-line
+      authMe && login(authMe); // мейби по-другому как-нибудь придумать
+    } catch (e) {
+      console.log("Ошибка в авторизации!", e);
+      logout();
+    }
+  }, [user]);
 
   useEffect(() => {
-    const checkIsAuth = async () => {
-      try {
-        const { data } = await axiosInstance.get("/auth_me", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-        login(data);
-      } catch (e) {
-        console.log("Ошибка в ПРОВЕРКЕ авторизации!", e);
-        logout();
-      }
-    };
-    void checkIsAuth();
+    checkAuth();
   }, []);
 
   const handleLogin = async (formData: AuthDto) => {
-    if (formData.name) {
-      try {
-        const { data } = await axiosInstance.post("/register", formData);
+    // eslint-disable-next-line
+    formData.name ? await registerUser(formData) : await loginUser(formData);
+    reset();
+  };
 
-        setIsAuth(true);
-        localStorage.setItem("token", data.token);
-        setIsLogin(true);
-      } catch (error) {
-        console.log("Ошибка в регистрации", error);
-      }
-      return;
-    }
-
+  const registerUser = async (formData: AuthDto) => {
     try {
-      const { data } = await axiosInstance.post("/auth", formData);
+      const registeredUser = await authService.registerUser(formData);
+      login(registeredUser);
+      setIsLogin(true);
+    } catch (error) {
+      console.log("Ошибка в регистрации", error);
+    }
+  };
 
-      setIsAuth(true);
-      localStorage.setItem("token", data.token);
+  const loginUser = async (formData: AuthDto) => {
+    try {
+      const loggedUser = await authService.loginUser(formData);
+      login(loggedUser);
       navigate("/");
     } catch (error) {
       console.error("Ошибка email/password", error);
     }
-    reset();
   };
 
   return (

@@ -6,17 +6,18 @@ import { useUserStore } from "app/providers/store";
 
 export const HomePage = () => {
   const navigate = useNavigate();
-  const { setIsAuth } = useUserStore();
+  const { logout, user } = useUserStore();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    setIsAuth(false);
+    logout();
     navigate("/login");
   };
 
   return (
     <div className={styles.root}>
       <h1>Добро пожаловать на главную страницу!</h1>
+      {user && <p>Привет, {user.name}</p>}
       <Button
         className={styles.button}
         theme={ButtonTheme.RED}
