@@ -1,7 +1,7 @@
 import React, { memo } from "react";
-import { LoginForm } from "src/features/AuthByUsername";
-import { SignUpForm } from "src/features/SignUp";
-import styles from "src/pages/Login/ui/Login.module.scss";
+import { LoginForm } from "features/AuthByUsername";
+import { SignUpForm } from "features/SignUp";
+import styles from "pages/Login/ui/Login.module.scss";
 
 export const Login = memo(() => {
   return (

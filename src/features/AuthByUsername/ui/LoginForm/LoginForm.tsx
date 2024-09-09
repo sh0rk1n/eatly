@@ -1,12 +1,12 @@
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
-import { AuthDto } from "src/features/AuthByUsername/model/schemas/auth.schemas";
-import { useUserStore } from "src/app/providers/store";
-import { Button, ButtonSize, ButtonTheme } from "src/shared/ui/Button/Button";
-import { Input } from "src/shared/ui/Input/Input";
-import styles from "src/pages/Login/ui/Login.module.scss";
-import { axiosInstance } from "src/shared/api/axios";
+import { AuthDto } from "features/AuthByUsername/model/schemas/auth.schemas";
+import { useUserStore } from "app/providers/store";
+import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
+import { Input } from "shared/ui/Input/Input";
+import styles from "pages/Login/ui/Login.module.scss";
+import { axiosInstance } from "shared/api/axios";
 
 export const LoginForm = memo(() => {
   const { login, logout, isAuth, setIsAuth } = useUserStore();
@@ -59,7 +59,6 @@ export const LoginForm = memo(() => {
 
         setIsAuth(true);
         localStorage.setItem("token", data.token);
-        //
         setIsLogin(true);
       } catch (error) {
         console.log("Ошибка в регистрации", error);

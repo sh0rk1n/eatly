@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "src/pages/Home/ui/HomePage.module.scss";
-import { Button, ButtonSize, ButtonTheme } from "src/shared/ui/Button/Button";
-import { useUserStore } from "src/app/providers/store";
+import styles from "pages/Home/ui/HomePage.module.scss";
+import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
+import { useUserStore } from "app/providers/store";
 
 export const HomePage = () => {
   const navigate = useNavigate();
