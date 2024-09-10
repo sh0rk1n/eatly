@@ -7,34 +7,38 @@ import { AccessTokenService } from "features/AuthByUsername/model/services/acces
 
 class AuthService {
   async getAuthMe() {
-    const res = await axiosInstance.get<AuthDto>("/auth_me", {
+    const { data } = await axiosInstance.get<AuthDto>("/auth_me", {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${AccessTokenService.get()}`,
       },
     });
-    return res.data;
+    return data;
   }
 
-  async registerUser(formData: AuthDto) {
-    try {
-      const { data } = await axiosInstance.post("/register", formData);
-      localStorage.setItem("token", data.token);
-      return data;
-    } catch (error) {
-      console.log("Ошибка в регистрации", error);
-      throw error;
-    }
-  }
-
-  async signIn({ email, password }: AuthDto) {
-    const response = await axiosInstance.post<AuthResponseDto>("/auth", {
+  async signUp({ name, password, email }: AuthDto) {
+    const { data } = await axiosInstance.post("/register", {
+      name,
       email,
       password,
     });
+    AccessTokenService.set(data.token);
+    return data;
+  }
 
-    if (response.status === 200) {
-      AccessTokenService.set(response.data.accessToken);
+  async signIn({ email, password }: AuthDto) {
+    const { data, status } = await axiosInstance.post<AuthResponseDto>(
+      "/auth",
+      {
+        email,
+        password,
+      },
+    );
+
+    if (status === 200 || status === 201) {
+      AccessTokenService.set(data.token);
     }
+
+    return data;
   }
 }
 

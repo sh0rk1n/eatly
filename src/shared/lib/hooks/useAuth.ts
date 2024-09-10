@@ -19,14 +19,14 @@ export const useAuth = () => {
     }
   }, [user]);
 
-  /*const registerUser = async (formData: AuthDto) => {
-      try {
-        const registeredUser = await authService.registerUser(formData);
-        login(registeredUser);
-      } catch (error) {
-        console.log("Ошибка в регистрации", error);
-      }
-    };*/
+  const signUp = async (data: AuthDto) => {
+    try {
+      await authService.signUp(data);
+      login(data);
+    } catch (error) {
+      console.log("Ошибка в регистрации API", error);
+    }
+  };
 
   const signIn = async (data: AuthDto) => {
     try {
@@ -37,5 +37,5 @@ export const useAuth = () => {
     }
   };
 
-  return { checkAuth, signIn };
+  return { checkAuth, signUp, signIn };
 };

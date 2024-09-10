@@ -1,7 +1,6 @@
 import Cookies from "js-cookie";
 
-const ACCESS_TOKEN = "accessToken";
-const REFRESH_TOKEN = "refreshToken";
+const ACCESS_TOKEN = "token";
 
 export class AccessTokenService {
   static get(): string | null {
@@ -15,6 +14,5 @@ export class AccessTokenService {
 
   static remove() {
     Cookies.remove(ACCESS_TOKEN);
-    Cookies.remove(REFRESH_TOKEN);
   }
 }

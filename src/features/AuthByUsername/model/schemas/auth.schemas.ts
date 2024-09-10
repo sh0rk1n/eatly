@@ -7,7 +7,7 @@ export const AuthSchema = z.object({
 });
 
 export const AuthResponse = z.object({
-  accessToken: z.string(),
+  token: z.string(),
 });
 
 export type AuthDto = z.infer<typeof AuthSchema>;

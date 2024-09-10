@@ -1,14 +1,38 @@
 import React, { memo } from "react";
-import styles from "pages/Login/ui/Login.module.scss";
-import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "shared/ui/Input/Input";
 import { AuthDto } from "features/AuthByUsername/model/schemas/auth.schemas";
+import { useAuth } from "shared/lib/hooks/useAuth";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
+import styles from "pages/SignUp/ui/SignUp.module.scss";
 
 export const SignUpForm = memo(() => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const { signUp } = useAuth();
   const { control, handleSubmit, reset } = useForm<AuthDto>();
 
+  const { mutate } = useMutation({
+    mutationKey: ["signUp"],
+    mutationFn: async (data: AuthDto) => signUp(data),
+    onSuccess: async () => {
+      reset();
+      navigate("/");
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+    },
+    onError: (error) => {
+      console.warn("Ошибка регистрации QUERY", error);
+    },
+  });
+
+  const onSubmit: SubmitHandler<AuthDto> = async (data) => {
+    mutate(data);
+  };
+
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.inputs}>
         <Controller
           control={control}
@@ -31,7 +55,15 @@ export const SignUpForm = memo(() => {
           )}
           name={"password"}
         />
+        <Button
+          className={styles.myButton}
+          theme={ButtonTheme.RED}
+          size={ButtonSize.L}
+          type="submit"
+        >
+          ЗАРЕГИСТРИРОВАТЬСЯ
+        </Button>
       </div>
-    </div>
+    </form>
   );
 });

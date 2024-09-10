@@ -3,14 +3,15 @@ import { useNavigate } from "react-router-dom";
 import styles from "pages/Home/ui/HomePage.module.scss";
 import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
 import { useUserStore } from "app/providers/store";
+import { AccessTokenService } from "features/AuthByUsername/model/services/access-token";
 
 export const HomePage = () => {
   const navigate = useNavigate();
   const { logout, user } = useUserStore();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
     logout();
+    AccessTokenService.remove(); // TODO: ????????????????
     navigate("/login");
   };
 
