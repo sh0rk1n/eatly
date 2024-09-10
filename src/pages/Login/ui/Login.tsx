@@ -7,7 +7,6 @@ export const Login = memo(() => {
   return (
     <div className={styles.root}>
       <LoginForm />
-      <SignUpForm />
     </div>
   );
 });

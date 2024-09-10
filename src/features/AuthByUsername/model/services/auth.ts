@@ -1,9 +1,13 @@
 import { axiosInstance } from "shared/api/axios";
-import { AuthDto } from "features/AuthByUsername/model/schemas/auth.schemas";
+import {
+  AuthDto,
+  AuthResponseDto,
+} from "features/AuthByUsername/model/schemas/auth.schemas";
+import { AccessTokenService } from "features/AuthByUsername/model/services/access-token";
 
 class AuthService {
   async getAuthMe() {
-    const res = await axiosInstance.get<AuthDto | undefined>("/auth_me", {
+    const res = await axiosInstance.get<AuthDto>("/auth_me", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -22,14 +26,14 @@ class AuthService {
     }
   }
 
-  async loginUser(formData: AuthDto) {
-    try {
-      const { data } = await axiosInstance.post("/auth", formData);
-      localStorage.setItem("token", data.token);
-      return data;
-    } catch (error) {
-      console.error("Ошибка email/password", error);
-      throw error;
+  async signIn({ email, password }: AuthDto) {
+    const response = await axiosInstance.post<AuthResponseDto>("/auth", {
+      email,
+      password,
+    });
+
+    if (response.status === 200) {
+      AccessTokenService.set(response.data.accessToken);
     }
   }
 }

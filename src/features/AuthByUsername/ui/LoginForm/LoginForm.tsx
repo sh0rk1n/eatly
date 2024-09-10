@@ -1,151 +1,68 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Controller, useForm } from "react-hook-form";
-import { useUserStore } from "app/providers/store";
-import { authService } from "features/AuthByUsername/model/services/auth";
+import React, { memo, useEffect } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { AuthDto } from "features/AuthByUsername/model/schemas/auth.schemas";
 import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
 import styles from "pages/Login/ui/Login.module.scss";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "shared/lib/hooks/useAuth";
 
 export const LoginForm = memo(() => {
-  const { login, logout, user } = useUserStore();
-  const [isLogin, setIsLogin] = useState(true); // TODO: убрать
-  const { control, handleSubmit, reset } = useForm<AuthDto>();
   const navigate = useNavigate();
-
-  const checkAuth = useCallback(async () => {
-    if (!user) return;
-
-    try {
-      const authMe = await authService.getAuthMe();
-      // eslint-disable-next-line
-      authMe && login(authMe); // мейби по-другому как-нибудь придумать
-    } catch (e) {
-      console.log("Ошибка в авторизации!", e);
-      logout();
-    }
-  }, [user]);
+  const queryClient = useQueryClient();
+  const { checkAuth, signIn } = useAuth();
+  const { control, handleSubmit, reset } = useForm<AuthDto>();
 
   useEffect(() => {
-    checkAuth();
+    void checkAuth();
   }, []);
 
-  const handleLogin = async (formData: AuthDto) => {
-    // eslint-disable-next-line
-    formData.name ? await registerUser(formData) : await loginUser(formData);
-    reset();
-  };
-
-  const registerUser = async (formData: AuthDto) => {
-    try {
-      const registeredUser = await authService.registerUser(formData);
-      login(registeredUser);
-      setIsLogin(true);
-    } catch (error) {
-      console.log("Ошибка в регистрации", error);
-    }
-  };
-
-  const loginUser = async (formData: AuthDto) => {
-    try {
-      const loggedUser = await authService.loginUser(formData);
-      login(loggedUser);
+  const { mutate } = useMutation({
+    mutationKey: ["auth"],
+    mutationFn: (data: AuthDto) => signIn(data),
+    onSuccess: () => {
+      reset();
       navigate("/");
-    } catch (error) {
-      console.error("Ошибка email/password", error);
-    }
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+    },
+    onError: (error) => {
+      console.warn("QUERY ОШИБКА", error);
+    },
+  });
+
+  const onSubmit: SubmitHandler<AuthDto> = async (data) => {
+    await mutate(data);
   };
 
   return (
     <>
-      <h1>{isLogin ? "ВХОД В АККАУНТ" : "РЕГИСТРАЦИЯ"}</h1>
-      <form onSubmit={handleSubmit(handleLogin)}>
-        {isLogin && (
-          <div className={styles.inputs}>
-            <Controller
-              control={control}
-              name="email"
-              render={({ field }) => (
-                <Input placeholder={"ВВЕДИТЕ ЛОГИН: "} {...field} />
-              )}
-            />
-            <Controller
-              control={control}
-              name="password"
-              render={({ field }) => (
-                <Input placeholder={"ВВЕДИТЕ ПАРОЛЬ"} {...field} />
-              )}
-            />
-          </div>
-        )}
-
-        {!isLogin && (
-          <div className={styles.inputs}>
-            <Controller
-              control={control}
-              render={({ field }) => (
-                <Input placeholder={"ВВЕДИТЕ ИМЯ: "} {...field} />
-              )}
-              name={"name"}
-            />
-            <Controller
-              control={control}
-              render={({ field }) => (
-                <Input placeholder={"ВВЕДИТЕ ПОЧТУ: "} {...field} />
-              )}
-              name={"email"}
-            />
-            <Controller
-              control={control}
-              render={({ field }) => (
-                <Input placeholder={"ВВЕДИТЕ ПАРОЛЬ: "} {...field} />
-              )}
-              name={"password"}
-            />
-          </div>
-        )}
-        {isLogin ? (
-          <>
-            <Button
-              className={styles.buttonLogin}
-              theme={ButtonTheme.BLUE}
-              size={ButtonSize.L}
-              type="submit"
-            >
-              ВОЙТИ
-            </Button>
-            <p>НОВИЧОК??? ЗАРЕГИСТРИРУЙСЯ!</p>
-            <Button
-              className={styles.buttonRegister}
-              theme={ButtonTheme.RED}
-              size={ButtonSize.XL}
-              onClick={() => setIsLogin(false)}
-            >
-              ЗАРЕГИСТРИРОВАТЬСЯ
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button
-              className={styles.buttonRegister}
-              theme={ButtonTheme.RED}
-              size={ButtonSize.XL}
-              type="submit"
-            >
-              ЗАРЕГИСТРИРОВАТЬСЯ
-            </Button>
-            <p>УЖЕ ЕСТЬ АККАУНТ? ВОЙДИТЕ!</p>
-            <Button
-              className={styles.buttonLogin}
-              theme={ButtonTheme.BLUE}
-              size={ButtonSize.L}
-              onClick={() => setIsLogin(true)}
-            >
-              ВОЙТИ
-            </Button>
-          </>
-        )}
+      <h1>{"Страница авторизации"}</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.inputs}>
+          <Controller
+            control={control}
+            name="email"
+            render={({ field }) => (
+              <Input placeholder={"Введите email:  "} {...field} />
+            )}
+          />
+          <Controller
+            control={control}
+            name="password"
+            render={({ field }) => (
+              <Input placeholder={"Введите пароль: "} {...field} />
+            )}
+          />
+          <Button
+            className={styles.buttonLogin}
+            theme={ButtonTheme.BLUE}
+            size={ButtonSize.L}
+            type="submit"
+          >
+            ВОЙТИ
+          </Button>
+        </div>
       </form>
     </>
   );

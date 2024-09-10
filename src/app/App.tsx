@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { AppRouter } from "app/providers/router/AppRouter";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
-  return <AppRouter />;
+  const [client] = useState<QueryClient>(
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          refetchOnWindowFocus: false,
+        },
+      },
+    }),
+  );
+  return (
+    <QueryClientProvider client={client}>
+      <AppRouter />
+    </QueryClientProvider>
+  );
 }
 
 export default App;
