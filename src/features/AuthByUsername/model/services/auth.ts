@@ -6,15 +6,6 @@ import {
 import { AccessTokenService } from "features/AuthByUsername/model/services/access-token";
 
 class AuthService {
-  async getAuthMe() {
-    const { data } = await axiosInstance.get<AuthDto>("/auth_me", {
-      headers: {
-        Authorization: `Bearer ${AccessTokenService.get()}`,
-      },
-    });
-    return data;
-  }
-
   async signUp({ name, password, email }: AuthDto) {
     const { data } = await axiosInstance.post("/register", {
       name,
