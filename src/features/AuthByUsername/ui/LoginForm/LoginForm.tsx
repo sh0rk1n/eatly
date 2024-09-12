@@ -1,33 +1,18 @@
 import React, { memo } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AuthDto } from "features/AuthByUsername/model/schemas/auth.schemas";
-import { useAuth } from "shared/lib/hooks/useAuth";
+import { useAuth } from "shared/lib/hooks/auth/useAuth";
 import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
 import styles from "pages/Login/ui/Login.module.scss";
+import { UserDto } from "entities/User";
+import { useAuthMutation } from "shared/lib/hooks/auth/useAuthMutation";
 
 export const LoginForm = memo(() => {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { signIn } = useAuth();
-  const { control, handleSubmit, reset } = useForm<AuthDto>();
+  const { mutate } = useAuthMutation<UserDto>(signIn, "auth");
+  const { control, handleSubmit } = useForm<UserDto>();
 
-  const { mutate } = useMutation({
-    mutationKey: ["auth"],
-    mutationFn: async (data: AuthDto) => signIn(data),
-    onSuccess: async () => {
-      reset();
-      navigate("/");
-      queryClient.invalidateQueries({ queryKey: ["user"] });
-    },
-    onError: (error) => {
-      console.warn("QUERY ОШИБКА", error);
-    },
-  });
-
-  const onSubmit: SubmitHandler<AuthDto> = async (data) => {
+  const onSubmit: SubmitHandler<UserDto> = async (data) => {
     mutate(data);
   };
 

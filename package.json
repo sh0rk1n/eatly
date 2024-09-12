@@ -28,8 +28,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettier": "npx prettier . --write",
-    "prettier:fix": "npx prettier . --check"
+    "prettier": "npx prettier . --check",
+    "prettier:fix": "npx prettier . --write"
   },
   "eslintConfig": {
     "extends": []

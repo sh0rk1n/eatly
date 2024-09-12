@@ -1,33 +1,18 @@
 import React, { memo } from "react";
-import { useNavigate } from "react-router-dom";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "shared/ui/Input/Input";
-import { AuthDto } from "features/AuthByUsername/model/schemas/auth.schemas";
-import { useAuth } from "shared/lib/hooks/useAuth";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
+import { UserDto } from "entities/User";
 import styles from "pages/SignUp/ui/SignUp.module.scss";
+import { useAuthMutation } from "shared/lib/hooks/auth/useAuthMutation";
+import { useAuth } from "shared/lib/hooks/auth/useAuth";
 
 export const SignUpForm = memo(() => {
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const { signUp } = useAuth();
-  const { control, handleSubmit, reset } = useForm<AuthDto>();
+  const { mutate } = useAuthMutation<UserDto>(signUp, "signUp");
+  const { control, handleSubmit } = useForm<UserDto>();
 
-  const { mutate } = useMutation({
-    mutationKey: ["signUp"],
-    mutationFn: async (data: AuthDto) => signUp(data),
-    onSuccess: async () => {
-      reset();
-      navigate("/");
-      queryClient.invalidateQueries({ queryKey: ["user"] });
-    },
-    onError: (error) => {
-      console.warn("Ошибка регистрации QUERY", error);
-    },
-  });
-
-  const onSubmit: SubmitHandler<AuthDto> = async (data) => {
+  const onSubmit: SubmitHandler<UserDto> = async (data) => {
     mutate(data);
   };
 
