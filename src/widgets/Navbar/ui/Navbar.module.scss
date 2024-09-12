@@ -1,0 +1,48 @@
+.Navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 8;
+  background-color: #fff;
+}
+.body {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0 25px;
+  border-bottom: 2px solid #cbcbcb;
+  column-gap: 3%;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  p {
+    margin-left: 5px;
+    font-family: var(--font-familly-main), sans-serif;
+    font-weight: 600;
+    font-size: 21px; // TODO: !!!
+    line-height: 130%;
+    color: var(--primary-color);
+  }
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+
+  a {
+    font-family: var(--font-familly-secondary), sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 150%;
+    text-transform: capitalize;
+    color: var(--secondary-color);
+
+    &:not(:last-child) {
+      margin-right: 30px;
+    }
+  }
+}

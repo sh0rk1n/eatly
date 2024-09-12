@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AppRouter } from "app/providers/router/AppRouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Navbar } from "widgets/Navbar";
 
 function App() {
   const [client] = useState<QueryClient>(
@@ -14,9 +15,14 @@ function App() {
   );
   // TODO: !
   return (
-    <QueryClientProvider client={client}>
-      <AppRouter />
-    </QueryClientProvider>
+    <div className="app">
+      <QueryClientProvider client={client}>
+        <Navbar />
+        <div className="content-page">
+          <AppRouter />
+        </div>
+      </QueryClientProvider>
+    </div>
   );
 }
 

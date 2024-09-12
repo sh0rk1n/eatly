@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useAuth } from "shared/lib/hooks/auth/useAuth";
-import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
 import styles from "pages/Login/ui/Login.module.scss";
 import { UserDto } from "entities/User";
@@ -34,14 +33,6 @@ export const LoginForm = memo(() => {
             <Input placeholder={"Введите пароль: "} {...field} />
           )}
         />
-        <Button
-          className={styles.buttonLogin}
-          theme={ButtonTheme.BLUE}
-          size={ButtonSize.L}
-          type="submit"
-        >
-          ВОЙТИ
-        </Button>
       </div>
     </form>
   );

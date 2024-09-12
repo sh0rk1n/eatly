@@ -1,1 +1,17 @@
 @import "reset";
+@import "variables/global";
+
+.app {
+  background: var(--bg-color);
+  min-height: 100vh;
+}
+
+.content-page {
+  display: flex;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 15px;
+}

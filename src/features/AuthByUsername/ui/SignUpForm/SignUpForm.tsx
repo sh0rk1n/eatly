@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "shared/ui/Input/Input";
-import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
 import { UserDto } from "entities/User";
 import styles from "pages/SignUp/ui/SignUp.module.scss";
 import { useAuthMutation } from "shared/lib/hooks/auth/useAuthMutation";
@@ -40,14 +39,6 @@ export const SignUpForm = memo(() => {
           )}
           name={"password"}
         />
-        <Button
-          className={styles.myButton}
-          theme={ButtonTheme.RED}
-          size={ButtonSize.L}
-          type="submit"
-        >
-          ЗАРЕГИСТРИРОВАТЬСЯ
-        </Button>
       </div>
     </form>
   );

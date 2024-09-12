@@ -1,43 +1,45 @@
-import { ButtonHTMLAttributes, memo, ReactNode } from "react";
-import styles from "./Button.module.scss";
+import { Button, ButtonProps } from "@mui/material";
+import { memo } from "react";
 
-export enum ButtonTheme {
-  CLEAR = "CLEAR",
-  RED = "RED",
-  BLUE = "BLUE",
+interface MyButtonProps extends ButtonProps {
+  variant: "text" | "outlined" | "contained";
+  size: "small" | "medium" | "large";
+  bold?: boolean;
+  borderRadius?: string;
 }
 
-export enum ButtonSize {
-  M = "size_m",
-  L = "size_l",
-  XL = "size_xl",
-}
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  className?: string;
-  theme?: ButtonTheme;
-  size?: ButtonSize;
-  disabled?: boolean;
-  children?: ReactNode;
-}
-
-export const Button = memo((props: ButtonProps) => {
-  const { className, theme, size, disabled, children, ...otherProps } = props;
-
-  const buttonClasses = [styles.button];
-  className && buttonClasses.push(className);
-  theme && buttonClasses.push(styles[theme]);
-  size && buttonClasses.push(styles[size]);
-  disabled && buttonClasses.push(styles.disabled);
-
+export const MyButton = memo((props: MyButtonProps) => {
+  const { children, variant, size, bold, borderRadius, ...otherProps } = props;
+  const buttonStyles = {
+    padding: {
+      small: "8px 17px",
+      medium: "12px 21px",
+      large: "17px 26px",
+    }[size],
+    fontSize: {
+      small: "8px",
+      medium: "14px",
+      large: "17px",
+    }[size],
+    borderRadius: borderRadius || (variant === "contained" ? "17px" : "12px"),
+    ...(variant === "contained" && {
+      backgroundColor: "#6c5fbc",
+      color: "white",
+    }),
+    ...(variant === "text" && {
+      backgroundColor: "none",
+      color: "#606060",
+    }),
+    ...(variant === "outlined" && {
+      border: "1.50px solid #6c5fbc",
+      color: "#6c5fbc",
+    }),
+    textTransform: "none",
+    ...(bold && { fontWeight: "bold" }),
+  };
   return (
-    <button
-      type="button"
-      disabled={disabled}
-      className={buttonClasses.join(" ")}
-      {...otherProps}
-    >
+    <Button {...otherProps} sx={{ ...buttonStyles }} variant={variant}>
       {children}
-    </button>
+    </Button>
   );
 });
