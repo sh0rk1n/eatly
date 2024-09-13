@@ -18,9 +18,7 @@ function App() {
     <div className="app">
       <QueryClientProvider client={client}>
         <Navbar />
-        <div className="content-page">
-          <AppRouter />
-        </div>
+        <AppRouter />
       </QueryClientProvider>
     </div>
   );

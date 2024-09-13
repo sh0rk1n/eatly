@@ -21,7 +21,6 @@ export const MyButton = memo((props: MyButtonProps) => {
       medium: "14px",
       large: "17px",
     }[size],
-    borderRadius: borderRadius || (variant === "contained" ? "17px" : "12px"),
     ...(variant === "contained" && {
       backgroundColor: "#6c5fbc",
       color: "white",
@@ -34,6 +33,7 @@ export const MyButton = memo((props: MyButtonProps) => {
       border: "1.50px solid #6c5fbc",
       color: "#6c5fbc",
     }),
+    borderRadius: borderRadius || (variant === "contained" ? "15px" : "12px"),
     textTransform: "none",
     ...(bold && { fontWeight: "bold" }),
   };

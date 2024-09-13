@@ -1,18 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { AccessTokenService } from "features/AuthByUsername/model/services/access-token";
-import cls from "pages/Home/ui/HomePage.module.scss";
-import { useAuthStore } from "app/providers/store/auth";
-import { Navbar } from "widgets/Navbar";
 import { MyButton } from "shared/ui/Button/Button";
 import trustpilot from "shared/assets/images/trustpilot.svg";
 import stars from "shared/assets/images/stars.svg";
 import food from "shared/assets/images/hero-food.svg";
 import graph from "shared/assets/images/graph.svg";
 import notification from "shared/assets/images/hero-notification.svg";
-import arrow from "shared/assets/images/arrow.svg";
-import decoration_1 from "shared/assets/images/decor-1.svg";
-import decoration_2 from "shared/assets/images/decor-2.svg";
+import mobile from "shared/assets/images/mobile.svg";
+import button_arrow from "shared/assets/images/button-arrow.svg";
+import res_1 from "shared/assets/images/res-1.svg";
+import res_2 from "shared/assets/images/res-2.svg";
+import res_3 from "shared/assets/images/res-3.svg";
+
+import cls from "pages/Home/ui/HomePage.module.scss";
 
 export const HomePage = () => {
   /*const navigate = useNavigate();
@@ -26,9 +25,9 @@ export const HomePage = () => {
   };*/
 
   return (
-    <main className="container">
+    <main className="">
       <section className={cls.hero}>
-        <div className={cls.hero_container}>
+        <div className={`container ${cls.hero_container}`}>
           <div className={cls.header}>
             <p className={cls.subtitle}>OVER 1000 USERS</p>
             <h1>
@@ -74,6 +73,111 @@ export const HomePage = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+      <div className={cls.features}>
+        <div className="container">
+          <ul className={cls.list}>
+            <li>
+              <div>10K+</div>
+              <p>
+                Satisfied Costumers <br />
+                All Great Over The World
+              </p>
+            </li>
+            <li>
+              <div>4M</div>
+              <p>
+                Healthy Dishes Sold <br />
+                Including Milk Shakes Smooth
+              </p>
+            </li>
+            <li>
+              <div>99.99%</div>
+              <p>
+                Reliable Customer <br />
+                Support We Provide Great Experiences
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <section className={cls.download}>
+        <div
+          className={`container container-padding ${cls.download_container}`}
+        >
+          <div className={cls.image}>
+            <img src={mobile} alt="" />
+          </div>
+          <div className={cls.content}>
+            <h2>
+              Premium <span>Quality</span> For Your Health
+            </h2>
+            <ul>
+              <li>
+                Premium quality food is made with ingredients that are packed
+                with essential vitamins, minerals.
+              </li>
+              <li>
+                These foods promote overall wellness by support healthy
+                digestion and boosting immunity
+              </li>
+            </ul>
+            <MyButton variant={"contained"} size={"large"}>
+              Download <img src={button_arrow} alt="" />
+            </MyButton>
+          </div>
+        </div>
+      </section>
+      <section className={cls.restaurants}>
+        <div
+          className={`container container-padding ${cls.restaurants_container}`}
+        >
+          <h2>
+            Our Top <span>Restaurants</span>
+          </h2>
+
+          <ul>
+            <li className={cls.item}>
+              <div className={cls.res_img}>
+                <img src={res_1} alt="" />
+              </div>
+              <div className={cls.info}>
+                <div className={cls.tag}>Healthy</div>
+                <h3>The Chicken King</h3>
+                <div className={cls.bottom}>
+                  <div className={cls.time}>24min •</div>
+                  <div className={cls.raiting}>4.8</div>
+                </div>
+              </div>
+            </li>
+            <li className={cls.item}>
+              <div className={cls.res_img}>
+                <img src={res_1} alt="" />
+              </div>
+              <div className={cls.info}>
+                <div className={cls.tag}>Healthy</div>
+                <h3>The Chicken King</h3>
+                <div className={cls.bottom}>
+                  <div className={cls.time}>24min •</div>
+                  <div className={cls.raiting}>4.8</div>
+                </div>
+              </div>
+            </li>
+            <li className={cls.item}>
+              <div className={cls.res_img}>
+                <img src={res_1} alt="" />
+              </div>
+              <div className={cls.info}>
+                <div className={cls.tag}>Healthy</div>
+                <h3>The Chicken King</h3>
+                <div className={cls.bottom}>
+                  <div className={cls.time}>24min •</div>
+                  <div className={cls.raiting}>4.8</div>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </section>
     </main>
