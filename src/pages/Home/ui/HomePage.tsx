@@ -9,9 +9,9 @@ import mobile from "shared/assets/images/mobile.svg";
 import button_arrow from "shared/assets/images/button-arrow.svg";
 import res_1 from "shared/assets/images/res-1.svg";
 import res_2 from "shared/assets/images/res-2.svg";
-import res_3 from "shared/assets/images/res-3.svg";
-
+import bookmark from "shared/assets/images/bookmark.svg";
 import cls from "pages/Home/ui/HomePage.module.scss";
+import { Link } from "react-router-dom";
 
 export const HomePage = () => {
   /*const navigate = useNavigate();
@@ -130,24 +130,40 @@ export const HomePage = () => {
         </div>
       </section>
       <section className={cls.restaurants}>
-        <div
-          className={`container container-padding ${cls.restaurants_container}`}
-        >
+        <div className={`container container-padding`}>
           <h2>
             Our Top <span>Restaurants</span>
           </h2>
-
           <ul>
             <li className={cls.item}>
               <div className={cls.res_img}>
                 <img src={res_1} alt="" />
               </div>
               <div className={cls.info}>
-                <div className={cls.tag}>Healthy</div>
+                <div className={`${cls.tag} ${cls.yellow}`}>Healthy</div>
                 <h3>The Chicken King</h3>
                 <div className={cls.bottom}>
                   <div className={cls.time}>24min •</div>
                   <div className={cls.raiting}>4.8</div>
+                  <button>
+                    <img src={bookmark} alt="" />
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li className={cls.item}>
+              <div className={cls.res_img}>
+                <img src={res_2} alt="" />
+              </div>
+              <div className={cls.info}>
+                <div className={`${cls.tag} ${cls.red}`}>Trending</div>
+                <h3>The Burger King</h3>
+                <div className={cls.bottom}>
+                  <div className={cls.time}>24min •</div>
+                  <div className={cls.raiting}>4.9</div>
+                  <button>
+                    <img src={bookmark} alt="" />
+                  </button>
                 </div>
               </div>
             </li>
@@ -156,29 +172,41 @@ export const HomePage = () => {
                 <img src={res_1} alt="" />
               </div>
               <div className={cls.info}>
-                <div className={cls.tag}>Healthy</div>
+                <div className={`${cls.tag} ${cls.yellow}`}>Healthy</div>
                 <h3>The Chicken King</h3>
                 <div className={cls.bottom}>
                   <div className={cls.time}>24min •</div>
                   <div className={cls.raiting}>4.8</div>
-                </div>
-              </div>
-            </li>
-            <li className={cls.item}>
-              <div className={cls.res_img}>
-                <img src={res_1} alt="" />
-              </div>
-              <div className={cls.info}>
-                <div className={cls.tag}>Healthy</div>
-                <h3>The Chicken King</h3>
-                <div className={cls.bottom}>
-                  <div className={cls.time}>24min •</div>
-                  <div className={cls.raiting}>4.8</div>
+                  <button>
+                    <img src={bookmark} alt="" />
+                  </button>
                 </div>
               </div>
             </li>
           </ul>
+          <div className={cls.view}>
+            <Link to={"/"}>
+              View all{" "}
+              <svg viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M2 9.90186H17.8041"
+                  stroke-width="2.25773"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M9.90234 2L17.8044 9.90206L9.90234 17.8041"
+                  stroke-width="2.25773"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </Link>
+          </div>
         </div>
+      </section>
+      <section className={cls.dishes}>
+        <h2>Our Top Dishes</h2>
       </section>
     </main>
   );

@@ -328,15 +328,14 @@
       top: 80%;
       left: 90%;
       width: 169px;
-      height: 61px;
+      height: 65px;
       background: url('../../../shared/assets/images/download-arrow.svg') top center no-repeat;
       background-size: cover;
     }
   }
 }
 
-.restaurants_container {
-
+.restaurants {
   h2 {
     margin: 0 0 85px;
     font-family: var(--font-familly-main), sans-serif;
@@ -357,6 +356,13 @@
     margin-bottom: 65px;
 
     li {
+      border-radius: 30px;
+      overflow: hidden;
+      background-color: #ffffff;
+      border: 1.5px solid #f4f4f6;
+      box-shadow: 6px 71px 36px rgba(229, 229, 229, 0.7);
+      transition: transform 0.3s ease;
+
       .res_img {
         position: relative;
 
@@ -366,21 +372,20 @@
           top: 0;
           left: 0;
           width: 100%;
-          height: 100%;
+          height: 98%;
           z-index: 2;
           background-color: rgb(50 49 66 / 10%);
         }
       }
 
       .info {
+        padding: 10px 10px 15.76px 35px;
         .tag {
-          color: #fb461d;
-          background-color: #f7c5ba;
-          max-width: fit-content;
-          font-family: var(--primary-color), sans-serif;
+          font-family: "Poppins", sans-serif;
           font-size: 13px;
+          max-width: fit-content;
           border-radius: 5px;
-          padding: 3px 5px;
+          padding: 5px 8px;
           margin-bottom: 5px;
         }
 
@@ -402,15 +407,7 @@
             font-family: var(--font-family-thirdary), sans-serif;
             font-size: 20px;
             color: #8E97A6;
-
-            ::marker {
-              unicode-bidi: isolate;
-              font-variant-numeric: tabular-nums;
-              text-transform: none;
-              text-indent: 0;
-              text-align: start;
-              text-align-last: start;
-            }
+            margin-right: 5px;
           }
 
           .raiting {
@@ -434,4 +431,34 @@
       }
     }
   }
+
+  .view {
+    text-align: right;
+
+    a{
+      font-family: "Poppins", sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+      letter-spacing: -0.1px;
+      color: #acadb9;
+      margin-right: 5px;
+      svg {
+        margin-left: 5px;
+        width: 19px;
+        height: 19px;
+        stroke: #acadb9;
+        fill: none;
+      }
+    }
+  }
+}
+
+.yellow {
+  color: #daa31a;
+  background-color: #f7edd0;
+}
+
+.red {
+  color: #fb461d;
+  background-color: #f7c5ba;
 }
