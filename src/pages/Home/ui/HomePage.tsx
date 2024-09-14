@@ -9,6 +9,9 @@ import mobile from "shared/assets/images/mobile.svg";
 import button_arrow from "shared/assets/images/button-arrow.svg";
 import res_1 from "shared/assets/images/res-1.svg";
 import res_2 from "shared/assets/images/res-2.svg";
+import food_1 from "shared/assets/images/food-1.svg";
+import food_2 from "shared/assets/images/food-2.svg";
+import food_3 from "shared/assets/images/food-3.svg";
 import bookmark from "shared/assets/images/bookmark.svg";
 import cls from "pages/Home/ui/HomePage.module.scss";
 import { Link } from "react-router-dom";
@@ -206,7 +209,137 @@ export const HomePage = () => {
         </div>
       </section>
       <section className={cls.dishes}>
-        <h2>Our Top Dishes</h2>
+        <div className="container container-padding">
+          <h2>
+            Our Top <span>Dishes</span>
+          </h2>
+          <ul>
+            <li>
+              <div className={cls.img}>
+                <img src={food_1} />
+              </div>
+              <div className={`${cls.tag} ${cls.yellow}`}>Healthy</div>
+              <h3>Chicken Hell</h3>
+              <div className={cls.info}>
+                <div className={cls.time}>24min •</div>
+                <div className={cls.raiting}>4.9</div>
+              </div>
+              <div className={cls.bottom}>
+                <div className={cls.price}>
+                  $12.<span>99</span>
+                </div>
+                <button>
+                  <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.2818 9.36025H8.94222V15.7891H6.41234V9.36025H0.102539V7.06848H6.41234V0.609863H8.94222V7.06848H15.2818V9.36025Z"></path>
+                  </svg>
+                </button>
+              </div>
+            </li>
+            <li>
+              <div className={cls.img}>
+                <img src={food_2} height={192} />
+              </div>
+              <div className={`${cls.tag} ${cls.red}`}>Trending</div>
+              <h3>Swe Dish</h3>
+              <div className={cls.info}>
+                <div className={cls.time}>34min •</div>
+                <div className={cls.raiting}>4.9</div>
+              </div>
+              <div className={cls.bottom}>
+                <div className={cls.price}>
+                  $19.<span>99</span>
+                </div>
+                <button>
+                  <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.2818 9.36025H8.94222V15.7891H6.41234V9.36025H0.102539V7.06848H6.41234V0.609863H8.94222V7.06848H15.2818V9.36025Z"></path>
+                  </svg>
+                </button>
+              </div>
+            </li>
+            <li>
+              <div className={cls.img}>
+                <img src={food_3} />
+              </div>
+              <div className={`${cls.tag} ${cls.green}`}>Supreme</div>
+              <h3>Swe Dish</h3>
+              <div className={cls.info}>
+                <div className={cls.time}>34min •</div>
+                <div className={cls.raiting}>4.9</div>
+              </div>
+              <div className={cls.bottom}>
+                <div className={cls.price}>
+                  $12.<span>99</span>
+                </div>
+                <button>
+                  <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.2818 9.36025H8.94222V15.7891H6.41234V9.36025H0.102539V7.06848H6.41234V0.609863H8.94222V7.06848H15.2818V9.36025Z"></path>
+                  </svg>
+                </button>
+              </div>
+            </li>
+            <li>
+              <div className={cls.img}>
+                <img src={food_1} />
+              </div>
+              <div className={`${cls.tag} ${cls.yellow}`}>Healthy</div>
+              <h3>Chicken Hell</h3>
+              <div className={cls.info}>
+                <div className={cls.time}>24min •</div>
+                <div className={cls.raiting}>4.9</div>
+              </div>
+              <div className={cls.bottom}>
+                <div className={cls.price}>
+                  $12.<span>99</span>
+                </div>
+                <button>
+                  <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.2818 9.36025H8.94222V15.7891H6.41234V9.36025H0.102539V7.06848H6.41234V0.609863H8.94222V7.06848H15.2818V9.36025Z"></path>
+                  </svg>
+                </button>
+              </div>
+            </li>
+            <li>
+              <div className={cls.img}>
+                <img src={food_2} />
+              </div>
+              <div className={`${cls.tag} ${cls.red}`}>Trending</div>
+              <h3>Swe Dish</h3>
+              <div className={cls.info}>
+                <div className={cls.time}>34min •</div>
+                <div className={cls.raiting}>4.9</div>
+              </div>
+              <div className={cls.bottom}>
+                <div className={cls.price}>
+                  $19.<span>99</span>
+                </div>
+                <button>
+                  <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.2818 9.36025H8.94222V15.7891H6.41234V9.36025H0.102539V7.06848H6.41234V0.609863H8.94222V7.06848H15.2818V9.36025Z"></path>
+                  </svg>
+                </button>
+              </div>
+            </li>
+          </ul>
+          <div className={cls.view}>
+            <Link to={"/"}>
+              View all
+              <svg viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M2 9.90186H17.8041"
+                  stroke-width="2.25773"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M9.90234 2L17.8044 9.90206L9.90234 17.8041"
+                  stroke-width="2.25773"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </Link>
+          </div>
+        </div>
       </section>
     </main>
   );

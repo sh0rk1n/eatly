@@ -1,3 +1,5 @@
+// TODO: Пока ужасно и накидано, потом исправлю, хочу сделать верстку сначала
+
 .hero {
   padding: 220px 0 120px;
 
@@ -453,12 +455,158 @@
   }
 }
 
+
+.red {
+  color: #fb461d;
+  background-color: #f7c5ba;
+}
+
+
 .yellow {
   color: #daa31a;
   background-color: #f7edd0;
 }
 
-.red {
-  color: #fb461d;
-  background-color: #f7c5ba;
+.green {
+  color: #309d5c;
+  background-color: #72e7a1;
+}
+
+.dishes {
+
+  h2 {
+    margin: 0 0 75px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 45px;
+    text-align: center;
+    color: #323142;
+
+    span {
+      color: var(--primary-color)
+    }
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 40px 30px;
+    margin-bottom: 65px;
+
+    li {
+      background-color: #ffffff;
+      border: 1.44089px solid #f4f4f6;
+      box-shadow: 7px 82px 41px rgba(229, 229, 229, 0.7);
+      border-radius: 35px;
+      overflow: hidden;
+      padding: 17px;
+      position: relative;
+      transition: transform 0.3s ease;
+
+      .img {
+        img {
+          max-width: 185px;
+          vertical-align: top;
+        }
+      }
+      .tag {
+        font-size: 12px;
+        margin-bottom: 3px;
+        max-width: fit-content;
+        font-family: "Poppins", sans-serif;
+        border-radius: 5px;
+        padding: 4px 8px;
+      }
+
+      h3 {
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-size: 23px;
+        color: #323142;
+        margin: 0 0 3px;
+      }
+
+      .info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 7px;
+        .time {
+          font-family: "Manrope", sans-serif;
+          font-size: 17px;
+          color: #8E97A6;
+          margin-right: 35px;
+        }
+
+        .raiting {
+          font-size: 17px;
+          font-family: "Manrope", sans-serif;
+          color: #8e97a6;
+          position: relative;
+
+          &::before {
+            margin-right: 4px;
+            content: "";
+            position: absolute;
+            top: -20%;
+            right: 100%;
+            background: url('../../../shared/assets/images/purple-star.svg') top center no-repeat;
+            width: 23px;
+            height: 23px;
+          }
+        }
+      }
+
+      .bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        columns: 5px;
+
+        .price {
+          font-family: "Manrope", sans-serif;
+          font-weight: 700;
+          font-size: 26px;
+          color: #323142;
+
+          span {
+            color: #8e97a6;
+            font-size: 20px;
+          }
+        }
+
+        button {
+          background-color: #323142;
+          padding: 10px 10px 5px;
+          border-radius: 9px;
+
+          svg {
+            width: 16px;
+            height: 16px;
+            fill: #ffffff;
+          }
+        }
+      }
+    }
+  }
+
+  .view {
+    text-align: right;
+
+    a{
+      font-family: "Poppins", sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+      letter-spacing: -0.1px;
+      color: #acadb9;
+      margin-right: 5px;
+      svg {
+        margin-left: 5px;
+        width: 19px;
+        height: 19px;
+        stroke: #acadb9;
+        fill: none;
+      }
+    }
+  }
+
 }
