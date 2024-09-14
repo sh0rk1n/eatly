@@ -14,7 +14,7 @@ export const MyButton = memo((props: MyButtonProps) => {
     padding: {
       small: "8px 17px",
       medium: "12px 21px",
-      large: "17px 26px",
+      large: "17px 27px",
     }[size],
     fontSize: {
       small: "8px",
@@ -30,10 +30,10 @@ export const MyButton = memo((props: MyButtonProps) => {
       color: "#606060",
     }),
     ...(variant === "outlined" && {
-      border: "1.50px solid #6c5fbc",
+      border: "1.5px solid #6c5fbc",
       color: "#6c5fbc",
     }),
-    borderRadius: borderRadius || (variant === "contained" ? "15px" : "12px"),
+    borderRadius: borderRadius || (variant === "contained" ? "18px" : "12px"),
     textTransform: "none",
     ...(bold && { fontWeight: "bold" }),
   };

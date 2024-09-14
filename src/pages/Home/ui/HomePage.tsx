@@ -237,7 +237,7 @@ export const HomePage = () => {
             </li>
             <li>
               <div className={cls.img}>
-                <img src={food_2} height={192} />
+                <img src={food_2} />
               </div>
               <div className={`${cls.tag} ${cls.red}`}>Trending</div>
               <h3>Swe Dish</h3>
@@ -338,6 +338,81 @@ export const HomePage = () => {
                 ></path>
               </svg>
             </Link>
+          </div>
+        </div>
+      </section>
+      <section className={cls.purchase}>
+        <div
+          className={`container container-padding ${cls.purchase_container}`}
+        >
+          <div className={cls.header}>
+            <h2>
+              Control <span>Purchases</span> <br /> Via Dashboard
+            </h2>
+            <ul>
+              <li>
+                <div className={cls.img}>
+                  <img src={food_1} />
+                </div>
+                <div className={cls.info}>
+                  <h3>Chicken Hell</h3>
+                  <p>On The Way</p>
+                  <div>3:09 PM</div>
+                </div>
+              </li>
+              <li>
+                <div className={cls.img}>
+                  <img src={food_2} />
+                </div>
+                <div className={cls.info}>
+                  <h3>Swe Dish</h3>
+                  <p className={cls.delivered}>Delivered</p>
+                  <div>Yesterday</div>
+                </div>
+              </li>
+              <li>
+                <div className={cls.img}>
+                  <img src={food_3} />
+                </div>
+                <div className={cls.info}>
+                  <h3>Fish Hell Veg</h3>
+                  <p className={cls.cancelled}>Cancelled</p>
+                  <div>Yesterday</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div className={cls.purchaseGraph}>
+            <div className={cls.header}>
+              <h3>Purchases</h3>
+              <select name="timeline">
+                <option value="mounth">This month</option>
+                <option value="week">This week</option>
+                <option value="year">This year</option>
+              </select>
+            </div>
+            <ul className={cls.info}>
+              <li className={cls.graphPurple}>
+                <div className={cls.wrapper}>
+                  <span className={cls.graphIcon}></span>
+                  <div className={cls.about}>
+                    <h4>Expense</h4>
+                    <p>Increased By 10%</p>
+                  </div>
+                </div>
+                <div className={cls.price}>$409.00</div>
+              </li>
+              <li className={cls.graphYellow}>
+                <div className={cls.wrapper}>
+                  <span className={cls.graphIcon}></span>
+                  <div className={cls.about}>
+                    <h4>Vocher Usage</h4>
+                    <p>Increased By 5%</p>
+                  </div>
+                </div>
+                <div className={cls.price}>$45.78</div>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
