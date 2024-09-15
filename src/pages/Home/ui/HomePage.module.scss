@@ -882,3 +882,133 @@
     background-color: #fbac18;
   }
 }
+
+.subscribe {
+  padding-bottom: 100px;
+  .wrapper {
+    padding: 40px 65px;
+    background: #6c5fbc url('../../../shared/assets/images/sub-bg.jpg') top center no-repeat;
+    background-size: cover;
+    border-radius: 14px;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 30%;
+      right: 5%;
+      width: 274px;
+      height: 276px;
+      background: url('../../../shared/assets/images/food-1.svg') top center no-repeat;
+      background-size: cover;
+    }
+
+    h2 {
+      font-family: "Poppins", sans-serif;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 70px;
+      color: #ffffff;
+      margin: 0 0 20px;
+    }
+
+    form {
+      display: inline-block;
+      position: relative;
+
+      input {
+        width: 440px;
+        height: 68px;
+        background: #fff;
+        box-shadow: 0 7px 45px rgba(0, 0, 0, 0.1);
+        border: none;
+        border-radius: 14px;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        letter-spacing: 0.03em;
+        color: #878787;
+        padding-left: 20px;
+      }
+
+      div {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+.footer {
+  padding: 80px 0 40px;
+  background-color: #eaeaea;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #cbcbcb;
+    margin-bottom: 50px;
+
+    a {
+      display: flex;
+      align-items: center;
+
+      img {
+        max-width: 100%;
+        vertical-align: top;
+      }
+      span {
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-size: 21px;
+        color: var(--primary-color);
+        margin-left: 5px;
+      }
+    }
+    ul {
+      display: flex;
+
+      li {
+        a {
+          font-family: "Inter", sans-serif;
+          font-weight: 500;
+          font-size: 18px;
+          color: #606060;
+          transition: color 0.2s ease;
+        }
+
+        &:not(:last-child) {
+          margin-right: 30px;
+        }
+      }
+
+    }
+  }
+
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      font-size: 17px;
+      color: #999999;
+      margin: 0;
+    }
+
+    ul {
+      display: flex;
+
+      li {
+        &:not(:last-child) {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}

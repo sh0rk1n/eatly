@@ -1,5 +1,7 @@
 import React from "react";
 import { MyButton } from "shared/ui/Button/Button";
+import logo from "shared/assets/images/logo.svg";
+import vk from "shared/assets/images/vk-logo.png";
 import trustpilot from "shared/assets/images/trustpilot.svg";
 import stars from "shared/assets/images/stars.svg";
 import food from "shared/assets/images/hero-food.svg";
@@ -15,6 +17,7 @@ import food_3 from "shared/assets/images/food-3.svg";
 import bookmark from "shared/assets/images/bookmark.svg";
 import cls from "pages/Home/ui/HomePage.module.scss";
 import { Link } from "react-router-dom";
+import { Slider } from "widgets/Slider";
 
 export const HomePage = () => {
   /*const navigate = useNavigate();
@@ -416,6 +419,75 @@ export const HomePage = () => {
           </div>
         </div>
       </section>
+      <Slider />
+      <div className={cls.subscribe}>
+        <div className="container">
+          <div className={cls.wrapper}>
+            <h2>Get 50%</h2>
+            <form action="#">
+              <input type="email" placeholder="Enter Your Email Address" />
+              <div>
+                <MyButton
+                  variant={"contained"}
+                  size={"medium"}
+                  borderRadius={"11px"}
+                >
+                  SUBSCRIBE
+                </MyButton>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <footer className={cls.footer}>
+        <div className="container">
+          <div className={cls.header}>
+            <Link to={"/"}>
+              <img src={logo} alt="" />
+              <span>eatly</span>
+            </Link>
+            <ul>
+              <li>
+                <Link to={"/"}>Blog</Link>
+              </li>
+              <li>
+                <Link to={"/"}>Pricing</Link>
+              </li>
+              <li>
+                <Link to={"/"}>About Us</Link>
+              </li>
+              <li>
+                <Link to={"/"}>Contacts</Link>
+              </li>
+            </ul>
+          </div>
+          <div className={cls.bottom}>
+            <p>© 2024 EATLY All Rights Reserved.</p>
+            <ul>
+              <li>
+                <Link to={"/"}>
+                  <img src={vk} alt="" height={22} width={22} />
+                </Link>
+              </li>
+              <li>
+                <Link to={"/"}>
+                  <img src={vk} alt="" height={22} width={22} />
+                </Link>
+              </li>
+              <li>
+                <Link to={"/"}>
+                  <img src={vk} alt="" height={22} width={22} />
+                </Link>
+              </li>
+              <li>
+                <Link to={"/"}>
+                  <img src={vk} alt="" height={22} width={22} />
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 };

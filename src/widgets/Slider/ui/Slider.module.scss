@@ -1,0 +1,19 @@
+.review {
+  .padding {
+    padding-top: 100px;
+    padding-bottom: 120px;
+  }
+  h2 {
+    margin: 0 0 80px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 45px;
+    text-align: center;
+    color: #323142;
+
+    span {
+      color: var(--primary-color);
+    }
+  }
+}
+
