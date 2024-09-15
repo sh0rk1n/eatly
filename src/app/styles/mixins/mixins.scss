@@ -1,0 +1,65 @@
+@mixin text-style($font-family, $font-weight, $font-size, $line-height, $color) {
+  font-family: $font-family;
+  font-weight: $font-weight;
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $color;
+}
+
+@mixin img-style() {
+  max-width: 100%;
+  vertical-align: top;
+}
+
+@mixin position-style(
+  $top: 0,
+  $right: 0,
+  $bottom: 0,
+  $left: 0,
+  $width: auto,
+  $max-width: auto
+) {
+  position: absolute;
+  inset: $top $right $bottom $left;
+  width: $width;
+  max-width: $max-width;
+}
+
+@mixin flex-center($justify: true) {
+  display: flex;
+  align-items: center;
+
+  @if $justify {
+    justify-content: space-between;
+  }
+}
+
+@mixin pseudo-element(
+  $top: 0,
+  $right: 0,
+  $bottom: 0,
+  $left: 0,
+  $width: auto,
+  $height: auto,
+  $background: null,
+  $background-size: cover,
+  $transform: null
+) {
+    content: '';
+    position: absolute;
+    inset: $top $right $bottom $left;
+    width: $width;
+    height: $height;
+
+    @if $background {
+      background: $background top center no-repeat;
+    }
+
+    @if $background-size {
+      background-size: $background-size;
+    }
+
+    @if $transform {
+      transform: $transform;
+    }
+  }

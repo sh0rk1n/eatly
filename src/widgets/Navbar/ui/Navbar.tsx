@@ -3,15 +3,16 @@ import cls from "./Navbar.module.scss";
 import logo from "shared/assets/images/logo.svg";
 import { MyButton } from "shared/ui/Button/Button";
 import { Link } from "react-router-dom";
+import { Container } from "@mui/material";
 
 export const Navbar = () => {
   return (
     <header className={cls.Navbar}>
-      <div className="container">
-        <div className={cls.body}>
+      <Container maxWidth="lg">
+        <div className={cls.wrapper}>
           <Link to={"/"} className={cls.logo}>
             <img src={logo} alt="" />
-            <p>eatly</p>
+            <span>eatly</span>
           </Link>
 
           <nav>
@@ -35,7 +36,7 @@ export const Navbar = () => {
             </MyButton>
           </div>
         </div>
-      </div>
+      </Container>
     </header>
   );
 };

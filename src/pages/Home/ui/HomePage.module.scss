@@ -1,219 +1,154 @@
-// TODO: Пока ужасно и накидано, потом исправлю, хочу сделать верстку сначала
+@import "../../../app/styles/mixins/mixins";
 
 .hero {
   padding: 220px 0 120px;
 
   &_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex-center;
+
     column-gap: 10px;
   }
-}
 
-.header {
-  flex: 1 1 49%;
+  .header {
+    .subtitle {
+      @include text-style(var(--font-familly-main), 600, 15px, 1, rgb(32 31 31 / 20%));
 
-  .subtitle {
-    display: inline-block;
-    padding-left: 60px;
+      text-transform: uppercase;
+      display: inline-block;
+      position: relative;
+      padding-left: 60px;
+      margin: 0 0 20px;
+
+      &::before {
+        @include pseudo-element(50%,auto,auto,0,54px, 2px, null, null, translateY(-50%));
+
+        background-color: rgb(32 31 31 / 20%);
+      }
+    }
+
+    h1 {
+      @include text-style(var(--font-familly-main), 600, 75px, 1.2, #201F1F);
+
+      margin: 0 0 20px;
+
+      span {
+        color: var(--primary-color);
+      }
+    }
+
+    .text {
+      @include text-style(var(--font-familly-secondary), 400, 18px, 1.56, #676767);
+
+      opacity: 0.7;
+      margin: 0 0 55px;
+
+      span {
+        color: var(--primary-color);
+      }
+    }
+
+    .reviews {
+      @include flex-center(false);
+
+      margin-top: 35px;
+
+      .stars {
+        margin: 8px 0 0 20px;
+      }
+
+      p {
+        @include text-style(var(--font-family-seventh), 500, 16px, 1.5, #334155);
+
+        opacity: 0.7;
+        margin: 10px 0 0 9px;
+      }
+    }
+
+  }
+
+  .decor {
     position: relative;
-    font-family: var(--font-familly-main), sans-serif;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 15px;
-    letter-spacing: 2px;
-    color: rgb(32 31 31 / 20%);
-    margin: 0 0 20px;
+    max-width: 40%;
+    margin-right: 9.5%;
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      left: 0;
-      width: 54px;
-      height: 2px;
-      background-color: rgb(32 31 31 / 20%);
-    }
-  }
+    &::after {
+      @include pseudo-element(12%,-15%,auto,auto,100px, 100px, url('../../../shared/assets/images/arrow.svg'));
 
-  h1 {
-    font-family: Poppins, sans-serif;
-    font-weight: 600;
-    font-size: 75px;
-    line-height: 1.2;
-    letter-spacing: -3px;
-    color: #201F1F;
-    margin: 0 0 20px;
-
-    span {
-      color: var(--primary-color);
-    }
-  }
-
-  .text {
-    font-family: var(--font-familly-secondary), sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 1.56;
-    color: #676767;
-    opacity: 0.7;
-    margin: 0 0 55px;
-
-    span  {
-      color: var(--primary-color);
-    }
-  }
-}
-
-.buttons {
-    button {
-      margin-right: 18px; // TODO: потом поменять
-    }
-}
-
-.reviews {
-  display: flex;
-  align-items: center;
-  margin-top: 35px;
-
-  .stars {
-    margin: 8px 0 0 20px;
-  }
-
-  p {
-    font-family: var(--font-family-seventh), sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #334155;
-    opacity: 0.7;
-    margin: 10px 0 0 9px;
-
-  }
-}
-
-//right side
-.decor {
-  position: relative;
-  max-width: 40%;
-  margin-right: 9.5%;
-
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 12%;
-    right: -14.8%;
-    width: 100px;
-    height: 100px;
-    z-index: 1;
-    background: url('../../../shared/assets/images/arrow.svg') top center no-repeat;
-    background-size: cover;
-  }
-}
-
-
-.notification {
-  position: absolute;
-  bottom: 90%;
-  left: 40%;
-  width: 73%;
-
-  &Item {
-     background: #fff;
-     border-radius: 16px;
-     box-shadow: 0 16px 25px rgb(70 70 70 / 5%);
-     padding: 5px 15px;
-     display: flex;
-     align-items: center;
-
-    &::before {
-      content: "";
-      position: absolute;
-      bottom: 100%;
-      right: 8%;
-      width: 42px;
-      height: 28px;
-      background: url('../../../shared/assets/images/decor-1.svg') top center no-repeat;
-      background-size: cover;
-    }
-  }
-
-  &Img {
-    max-width: 23%;
-    margin-right: 20px;
-
-    img {
-      max-width: 100%;
-      vertical-align: top;
-    }
-  }
-
-  &Info {
-    width: 100%;
-
-    h2 {
-      font-family: var(--font-familly-main),sans-serif;
-      font-weight: 600;
-      font-size: 16px;
-      color: var(--thirdary-color);
-      margin: 0 0 5px;
+      z-index: 1;
     }
 
-    p {
-      font-family: var(--font-familly-main),sans-serif;
-      font-weight: 500;
-      font-size: 10px;
-      color: var(--thirdary-color);
-      margin: 0 0 5px;
+    .notification {
+      @include position-style(auto, auto, 90%, 40%, 73%);
+
+
+      &Item {
+        @include flex-center(false);
+
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 16px 25px rgb(70 70 70 / 5%);
+        padding: 5px 15px;
+
+        &::before {
+          @include pseudo-element(auto,8%,100%,auto,42px, 28px, url("../../../shared/assets/images/decor-1.svg"));
+        }
+      }
+
+      &Img {
+        max-width: 23%;
+        margin-right: 20px;
+
+        img {
+          @include img-style;
+        }
+      }
+
+      &Info {
+        width: 100%;
+
+        h6 {
+          @include text-style(var(--font-familly-main), 600, 16px, 1.5,var(--thirdary-color));
+
+          margin: 0 0 5px;
+        }
+
+        p {
+          @include text-style(var(--font-familly-main), 500, 10px, 1.5, var(--thirdary-color));
+
+          margin: 0 0 5px;
+        }
+
+        div {
+          @include text-style(var(--font-family-main), 500, 11px, 1.5, var(--fourth-color));
+
+          text-align: right;
+        }
+      }
     }
 
-    div {
-      text-align: right;
-      font-family: Poppins, sans-serif;
-      font-weight: 500;
-      font-size: 11px;
-      color: var(--fourth-color);
+    .graph {
+      @include position-style(auto,auto,-15%,0,auto,73%);
+
+      &Item {
+        background-color: #fff;
+        box-shadow: 14.1205px 18.8273px 37.6546px rgb(26 32 44 / 15%);
+        border: 1px solid #edf2f7;
+        border-radius: 14px;
+        padding: 5px 0;
+
+        &::before {
+          @include pseudo-element(100%,auto,auto,-10%,38px, 33px, url('../../../shared/assets/images/decor-2.svg'));
+
+          z-index: 2;
+        }
+
+        img {
+          @include img-style;
+        }
+      }
     }
   }
 }
-
-.graph {
-  position: absolute;
-  bottom: -15%;
-  left: 0;
-  max-width: 50%;
-
-  &Item {
-    background-color: #fff;
-    box-shadow: 14.1205px 18.8273px 37.6546px rgb(26 32 44 / 15%);
-    border: 1px solid #edf2f7;
-    border-radius: 14px;
-    padding: 5px 0;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: -10%;
-      width: 38px;
-      height: 33px;
-      z-index: 2;
-      background: url('../../../shared/assets/images/decor-2.svg') top center no-repeat;
-      background-size: cover;
-    }
-
-    img {
-      max-width: 100%;
-      vertical-align: top;
-    }
-  }
-}
-
-
-// FEATURES TODO: destructing
 
 .features {
   background: var(--primary-color);
@@ -255,7 +190,6 @@
   }
 }
 
-// DOWNLOAD
 
 .download_container {
   display: flex;
@@ -268,8 +202,7 @@
   position: relative;
 
   img {
-    max-width: 100%;
-    vertical-align: top;
+    @include img-style;
   }
 
   &::before {
@@ -656,8 +589,7 @@
             margin-right: 20px;
 
             img {
-              max-width: 100%;
-              vertical-align: top;
+              @include img-style;
             }
           }
 
@@ -696,10 +628,10 @@
 
     .purchaseGraph {
       flex: 0 1 47%;
-      background: #ffffff;
+      background: #fff;
       border: 1px solid #edf2f7;
       border-radius: 25px;
-      box-shadow: 0 20px 30px rgba(50, 49, 66, 0.2);
+      box-shadow: 0 20px 30px rgb(50 49 66 / 20%);
       padding: 43px;
 
       .header {
@@ -709,7 +641,7 @@
         margin-bottom: 45px;
 
         h3 {
-          font-family: "Manrope", sans-serif;
+          font-family: Manrope, sans-serif;
           font-weight: 600;
           font-size: 28px;
           color: #1a202c;
@@ -717,7 +649,7 @@
         }
 
         select {
-          font-family: "Manrope", sans-serif;
+          font-family: Manrope, sans-serif;
           font-weight: 600;
           font-size: 19px;
           letter-spacing: 0.6px;
@@ -729,6 +661,7 @@
 
         }
       }
+
       .info {
         li {
           position: relative;
@@ -747,16 +680,19 @@
           .wrapper {
             display: flex;
             align-items: center;
+
             .about {
               margin-left: 15px;
-              font-family: "Manrope", sans-serif;
+              font-family: Manrope, sans-serif;
               letter-spacing: 0.6px;
+
               h4 {
                 font-weight: 600;
                 font-size: 19px;
                 color: #1A202C;
                 margin: 0 0 7px;
               }
+
               p {
                 font-weight: 500;
                 font-size: 16px;
@@ -767,8 +703,9 @@
 
 
           }
+
           .price {
-            font-family: "Manrope", sans-serif;
+            font-family: Manrope, sans-serif;
             font-weight: 600;
             font-size: 22px;
             color: #1a202c;
@@ -885,6 +822,7 @@
 
 .subscribe {
   padding-bottom: 100px;
+
   .wrapper {
     padding: 40px 65px;
     background: #6c5fbc url('../../../shared/assets/images/sub-bg.jpg') top center no-repeat;
@@ -904,11 +842,11 @@
     }
 
     h2 {
-      font-family: "Poppins", sans-serif;
+      font-family: Poppins, sans-serif;
       text-transform: uppercase;
       font-weight: 800;
       font-size: 70px;
-      color: #ffffff;
+      color: #fff;
       margin: 0 0 20px;
     }
 
@@ -920,10 +858,10 @@
         width: 440px;
         height: 68px;
         background: #fff;
-        box-shadow: 0 7px 45px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 7px 45px rgb(0 0 0 / 10%);
         border: none;
         border-radius: 14px;
-        font-family: "Poppins", sans-serif;
+        font-family: Poppins, sans-serif;
         font-size: 16px;
         letter-spacing: 0.03em;
         color: #878787;
@@ -957,23 +895,24 @@
       align-items: center;
 
       img {
-        max-width: 100%;
-        vertical-align: top;
+        @include img-style;
       }
+
       span {
-        font-family: "Poppins", sans-serif;
+        font-family: Poppins, sans-serif;
         font-weight: 600;
         font-size: 21px;
         color: var(--primary-color);
         margin-left: 5px;
       }
     }
+
     ul {
       display: flex;
 
       li {
         a {
-          font-family: "Inter", sans-serif;
+          font-family: Inter, sans-serif;
           font-weight: 500;
           font-size: 18px;
           color: #606060;
@@ -994,10 +933,10 @@
     align-items: center;
 
     p {
-      font-family: "Inter", sans-serif;
+      font-family: Inter, sans-serif;
       font-weight: 500;
       font-size: 17px;
-      color: #999999;
+      color: #999;
       margin: 0;
     }
 
