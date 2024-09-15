@@ -1,8 +1,8 @@
 :root {
-    --font-familly-main: "Poppins", sans-serif;
-    --font-familly-secondary: "Inter", sans-serif;
+    --font-family-main: "Poppins", sans-serif;
+    --font-family-secondary: "Inter", sans-serif;
     --font-family-thirdary:  "Manrope", sans-serif;
-    --font-familly-fourth:  "Roboto", sans-serif;
+    --font-family-fourth:  "Roboto", sans-serif;
     --font-family-fifth:  "Public Sans", sans-serif;
     --font-family-sixth:"Quicksand", sans-serif;
     --font-family-seventh: "Plus Jakarta Sans", sans-serif;
@@ -14,7 +14,18 @@
     --secondary-color:#606060;
     --thirdary-color: #323142;
     --fourth-color: #acadb9;
+    --fifth-color: #8e97a6;
+    --sixth-color: #1a202c;
+    --seventh-color:#a0aec0;
 
+    //
+    --red: #fb461d;
+    --red-bg: #f7c5ba;
+    --yellow: #daa31a;
+    --yellow-bg: #f7edd0;
+    --green: #309d5c;
+    --green-bg: #72e7a1;
+    
     // Размеры TODO: мб потом другой подход
     --navbar-height: 62px;
 }

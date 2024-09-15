@@ -11,7 +11,7 @@
 
   .header {
     .subtitle {
-      @include text-style(var(--font-familly-main), 600, 15px, 1, rgb(32 31 31 / 20%));
+      @include text-style(var(--font-family-main), 600, 15px, 1, rgb(32 31 31 / 20%));
 
       text-transform: uppercase;
       display: inline-block;
@@ -20,14 +20,14 @@
       margin: 0 0 20px;
 
       &::before {
-        @include pseudo-element(50%,auto,auto,0,54px, 2px, null, null, translateY(-50%));
+        @include pseudo-element(50%, auto ,auto, 0, 54px,  2px, null, null, translateY(-50%));
 
         background-color: rgb(32 31 31 / 20%);
       }
     }
 
     h1 {
-      @include text-style(var(--font-familly-main), 600, 75px, 1.2, #201F1F);
+      @include text-style(var(--font-family-main), 600, 75px, 1.2, #201F1F);
 
       margin: 0 0 20px;
 
@@ -37,7 +37,7 @@
     }
 
     .text {
-      @include text-style(var(--font-familly-secondary), 400, 18px, 1.56, #676767);
+      @include text-style(var(--font-family-secondary), 400, 18px, 1.56, #676767);
 
       opacity: 0.7;
       margin: 0 0 55px;
@@ -72,7 +72,7 @@
     margin-right: 9.5%;
 
     &::after {
-      @include pseudo-element(12%,-15%,auto,auto,100px, 100px, url('../../../shared/assets/images/arrow.svg'));
+      @include pseudo-element(12%, -15% , auto, auto, 100px,  100px,  '../../../shared/assets/images/arrow.svg');
 
       z-index: 1;
     }
@@ -90,7 +90,7 @@
         padding: 5px 15px;
 
         &::before {
-          @include pseudo-element(auto,8%,100%,auto,42px, 28px, url("../../../shared/assets/images/decor-1.svg"));
+          @include pseudo-element(auto, 8%, 100%, auto, 42px, 28px, "../../../shared/assets/images/decor-1.svg");
         }
       }
 
@@ -107,13 +107,13 @@
         width: 100%;
 
         h6 {
-          @include text-style(var(--font-familly-main), 600, 16px, 1.5,var(--thirdary-color));
+          @include text-style(var(--font-family-main), 600, 16px, 1.5,var(--thirdary-color));
 
           margin: 0 0 5px;
         }
 
         p {
-          @include text-style(var(--font-familly-main), 500, 10px, 1.5, var(--thirdary-color));
+          @include text-style(var(--font-family-main), 500, 10px, 1.5, var(--thirdary-color));
 
           margin: 0 0 5px;
         }
@@ -137,7 +137,7 @@
         padding: 5px 0;
 
         &::before {
-          @include pseudo-element(100%,auto,auto,-10%,38px, 33px, url('../../../shared/assets/images/decor-2.svg'));
+          @include pseudo-element(100%, auto, auto, -10%, 38px, 33px, '../../../shared/assets/images/decor-2.svg');
 
           z-index: 2;
         }
@@ -151,133 +151,112 @@
 }
 
 .features {
-  background: var(--primary-color);
-  padding: 55px 0;
   position: relative;
   overflow: hidden;
-}
+  background: var(--primary-color);
+  padding: 55px 0;
+  margin-top: 20px;
 
-.list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  .list {
+    @include flex-center;
 
-  li {
-    flex: 0 1 33.33%;
-    padding: 0 25px;
-    text-align: center;
-    border-right: 1px solid #c5c5c5;
-
-    &:nth-child(3n) {
-      border: none;
-    }
-
-    div {
-      font-family: var(--font-familly-main), sans-serif;
-      color: #fff;
-      font-weight: 700;
-      font-size: 43px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-family: var(--font-familly-secondary), sans-serif;
-      font-weight: 500;
-      font-size: 14px;
-      color: #C5BFED;
-      margin: 0;
-    }
-  }
-}
-
-
-.download_container {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.image {
-  flex-shrink: 1;
-  position: relative;
-
-  img {
-    @include img-style;
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: -5%;
-    left: 100%;
-    width: 38px;
-    height: 33px;
-    transform: rotate(180deg);
-    z-index: 2;
-    background: url('../../../shared/assets/images/decor-2.svg') top center no-repeat;
-  }
-}
-
-.content {
-  flex: 0 1 48%;
-
-  h2 {
-    text-align: left;
-    margin: 0 0 60px;
-    font-family: var(--font-familly-main), sans-serif;
-    font-weight: 600;
-    font-size: 45px;
-    color: #323142;
-
-    span {
-      color: var(--primary-color)
-    }
-  }
-
-  ul {
-    margin-bottom: 50px;
+    align-items: normal;
 
     li {
-      list-style: initial;
-      font-family: var(--font-familly-secondary), sans-serif;
-      font-size: 20px;
-      line-height: 1.5;
-      color: #606060;
-      margin-bottom: 25px;
+      flex: 0 1 33.33%;
+      padding: 0 25px;
+      text-align: center;
+      border-right: 1px solid #c5c5c5;
 
-      &::marker {
-        unicode-bidi: isolate;
-        font-variant-numeric: tabular-nums;
-        text-transform: none;
-        text-indent: 0;
-        text-align: start;
-        text-align-last: start;
+      &:nth-child(3n) {
+        border: none;
+      }
+
+      h3 {
+        @include text-style(var(--font-family-main), 700, 43px, normal, #fff);
+
+        margin-bottom: 10px;
+      }
+
+      p {
+        @include text-style(var(--font-family-secondary), 500, 14px, normal,#C5BFED);
+
+        margin: 0;
       }
     }
   }
+}
 
-  button {
-    &::before {
-      content: "";
-      position: absolute;
-      top: 80%;
-      left: 90%;
-      width: 169px;
-      height: 61px;
-      background: url('../../../shared/assets/images/download-arrow.svg') top center no-repeat;
-      background-size: cover;
+.download {
+  &_container {
+    @include flex-center(false);
+
+    justify-content: space-evenly;
+
+    .image {
+      flex-shrink: 1;
+      position: relative;
+
+      img {
+        @include img-style;
+      }
+
+      &::before {
+        @include pseudo-element(-5%, auto, auto, 100%, 38px, 33px, '../../../shared/assets/images/decor-2.svg', cover,rotate(180deg));
+
+        z-index: 2;
+      }
+    }
+
+    .content {
+      flex: 0 1 48%;
+
+      h2 {
+        @include text-style(var(--font-family-main), 600, 45px, normal, var(--thirdary-color));
+
+        text-align: left;
+        margin: 0 0 60px;
+
+        span {
+          color: var(--primary-color)
+        }
+      }
+
+      ul {
+        margin-bottom: 50px;
+
+        li {
+          @include text-style(var(--font-family-secondary), 500, 20px, 1.5, var(--secondary-color));
+
+          list-style: initial;
+          margin-bottom: 25px;
+
+          &::marker {
+            unicode-bidi: isolate;
+            font-variant-numeric: tabular-nums;
+            text-transform: none;
+            text-indent: 0;
+            text-align: start;
+            text-align-last: start;
+          }
+        }
+      }
+
+      button {
+        &::before {
+          @include pseudo-element(80%, auto, auto, 90%, 169px, 61px, '../../../shared/assets/images/download-arrow.svg');
+        }
+      }
     }
   }
 }
 
 .restaurants {
   h2 {
-    margin: 0 0 85px;
-    font-family: var(--font-familly-main), sans-serif;
-    font-weight: 600;
-    font-size: 45px;
+    @include text-style(var(--font-family-main), 600, 45px, normal, var(--thirdary-color));
+
     text-align: center;
-    color: #323142;
+    margin: 0 0 85px;
 
     span {
       color: var(--primary-color)
@@ -302,12 +281,8 @@
         position: relative;
 
         &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 98%;
+          @include pseudo-element(0, auto, auto, 0, 100%, 98%);
+
           z-index: 2;
           background-color: rgb(50 49 66 / 10%);
         }
@@ -316,104 +291,46 @@
       .info {
         padding: 10px 10px 15.76px 35px;
 
-        .tag {
-          font-family: Poppins, sans-serif;
-          font-size: 13px;
-          max-width: fit-content;
-          border-radius: 5px;
-          padding: 5px 8px;
-          margin-bottom: 5px;
-        }
 
         h3 {
-          font-family: var(--font-familly-main), sans-serif;
-          font-weight: 600;
-          font-size: 26px;
-          color: #323142;
+          @include text-style(var(--font-family-main), 600, 26px, normal,var(--thirdary-color));
+
           margin: 0 0 5px;
         }
 
         .bottom {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
+          @include flex-center(true,true);
+
           column-gap: 30px;
 
           .time {
-            font-family: var(--font-family-thirdary), sans-serif;
-            font-size: 20px;
-            color: #8E97A6;
+            @include text-style(var(--font-family-thirdary),500, 20px, normal, var(--fifth-color));
+
             margin-right: 5px;
           }
 
           .raiting {
-            font-size: 20px;
+            @include text-style(var(--font-family-thirdary), 500, 20px, normal, var(--fifth-color));
+
             flex: 1 1 auto;
-            font-family: var(--font-family-thirdary), sans-serif;
-            color: #8e97a6;
             position: relative;
 
             &::before {
-              content: "";
-              position: absolute;
-              top: -15%;
-              right: 100%;
-              background: url('../../../shared/assets/images/purple-star.svg') top center no-repeat;
-              width: 26px;
-              height: 27px;
+              @include pseudo-element(-15%, 100%, auto, auto, 26px, 27px, '../../../shared/assets/images/purple-star.svg');
             }
           }
         }
       }
     }
   }
-
-  .view {
-    text-align: right;
-
-    a{
-      font-family: Poppins, sans-serif;
-      font-weight: 500;
-      font-size: 20px;
-      letter-spacing: -0.1px;
-      color: #acadb9;
-      margin-right: 5px;
-
-      svg {
-        margin-left: 5px;
-        width: 19px;
-        height: 19px;
-        stroke: #acadb9;
-        fill: none;
-      }
-    }
-  }
-}
-
-
-.red {
-  color: #fb461d;
-  background-color: #f7c5ba;
-}
-
-.yellow {
-  color: #daa31a;
-  background-color: #f7edd0;
-}
-
-.green {
-  color: #309d5c;
-  background-color: #72e7a1;
 }
 
 .dishes {
   h2 {
-    margin: 0 0 75px;
-    font-family: Poppins, sans-serif;
-    font-weight: 600;
-    font-size: 45px;
+    @include text-style(var(--font-family-main), 600, 45px, normal, var(--thirdary-color));
+
     text-align: center;
-    color: #323142;
+    margin: 0 0 75px;
 
     span {
       color: var(--primary-color)
@@ -428,12 +345,12 @@
 
     li {
       background-color: #fff;
-      border: 1.44089px solid #f4f4f6;
-      box-shadow: 7px 82px 41px rgb(229 229 229 / 70%);
+      border: 1.5px solid #f4f4f6;
       border-radius: 35px;
+      box-shadow: 7px 82px 41px rgb(229 229 229 / 70%);
       overflow: hidden;
-      padding: 17px;
       position: relative;
+      padding: 17px;
       transition: transform 0.3s ease;
 
       .img {
@@ -444,77 +361,56 @@
         }
       }
 
-      .tag {
-        font-size: 12px;
-        margin-bottom: 5px;
-        max-width: fit-content;
-        font-family: Poppins, sans-serif;
-        border-radius: 5px;
-        padding: 4px 8px;
-      }
-
       h3 {
-        font-family: Poppins, sans-serif;
-        font-weight: 600;
-        font-size: 23px;
-        color: #323142;
+        @include text-style(var(--font-family-main), 600, 23px, normal, var(--thirdary-color));
+
         margin: 0 0 5px;
       }
 
       .info {
-        display: flex;
-        align-items: center;
+        @include flex-center(false);
+
         margin-bottom: 7px;
 
+        .time, .raiting {
+          @include text-style(var(--font-family-thirdary), 500, 17px, normal, var(--fifth-color));
+        }
+
         .time {
-          font-family: Manrope, sans-serif;
-          font-size: 17px;
-          color: #8E97A6;
           margin-right: 35px;
         }
 
         .raiting {
-          font-size: 17px;
-          font-family: Manrope, sans-serif;
-          color: #8e97a6;
+          color: var(--fifth-color);
           position: relative;
 
           &::before {
+            @include pseudo-element(-20%, 100%, auto, auto, 23px, 23px,'../../../shared/assets/images/purple-star.svg');
+
             margin-right: 4px;
-            content: "";
-            position: absolute;
-            top: -20%;
-            right: 100%;
-            background: url('../../../shared/assets/images/purple-star.svg') top center no-repeat;
-            width: 23px;
-            height: 23px;
           }
         }
       }
 
       .bottom {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+       @include flex-center;
+
         columns: 5px;
         margin: 8px 0 10px;
 
         .price {
-          font-family: Manrope, sans-serif;
-          font-weight: 700;
-          font-size: 26px;
-          color: #323142;
-
+          @include text-style(var(--font-family-thirdary), 700, 26px, normal, var(--thirdary-color));
+          
           span {
-            color: #8e97a6;
             font-size: 20px;
+            color: var(--fifth-color);
           }
         }
 
         button {
           background-color: #323142;
-          padding: 10px 10px 5px;
           border-radius: 9px;
+          padding: 10px 10px 5px;
 
           svg {
             width: 16px;
@@ -525,33 +421,12 @@
       }
     }
   }
-
-  .view {
-    text-align: right;
-
-    a{
-      font-family: Poppins, sans-serif;
-      font-weight: 500;
-      font-size: 20px;
-      letter-spacing: -0.1px;
-      color: #acadb9;
-      margin-right: 5px;
-
-      svg {
-        margin-left: 5px;
-        width: 19px;
-        height: 19px;
-        stroke: #acadb9;
-        fill: none;
-      }
-    }
-  }
 }
 
 .purchase {
   &_container {
-    display: flex;
-    justify-content: space-between;
+    @include flex-center;
+
     align-items: flex-start;
     column-gap: 10px;
 
@@ -559,12 +434,10 @@
       flex: 0 1 50%;
 
       h2 {
+        @include text-style(var(--font-family-main), 600, 45px, normal, var(--thirdary-color));
+
         text-align: left;
         margin: 0 0 50px;
-        font-family: Poppins, sans-serif;
-        font-weight: 600;
-        font-size: 45px;
-        color: #323142;
 
         span {
           color: var(--primary-color);
@@ -576,8 +449,8 @@
         grid-template-columns: 0.7fr;
 
         li {
-          display: flex;
-          align-items: center;
+          @include flex-center(false);
+
           background: #fff;
           box-shadow: 0 20px 30px rgb(70 70 70 / 10%);
           border-radius: 16px;
@@ -597,31 +470,23 @@
             width: 100%;
 
             h3 {
-              font-family: Poppins, sans-serif;
-              font-weight: 600;
-              font-size: 16px;
-              color: #323142;
+              @include text-style(var(--font-family-main), 600, 16px, normal, var(--thirdary-color));
+
               margin: 0 0 5px;
             }
 
             p {
-              font-family: Poppins, sans-serif;
-              font-weight: 500;
-              font-size: 10px;
-              color: #323142;
+              @include text-style(var(--font-family-main), 500, 10px, normal, var(--thirdary-color));
+
               margin: 0 0 5px;
             }
 
             div {
-              text-align: right;
-              font-family: Poppins, sans-serif;
-              font-weight: 500;
-              font-size: 11px;
-              color: #acadb9;
+              @include text-style(var(--font-family-main), 500, 11px, normal, var(--fourth-color));
 
+              text-align: right;
             }
           }
-
         }
       }
     }
@@ -635,40 +500,32 @@
       padding: 43px;
 
       .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        @include flex-center;
+
         margin-bottom: 45px;
 
         h3 {
-          font-family: Manrope, sans-serif;
-          font-weight: 600;
-          font-size: 28px;
-          color: #1a202c;
+          @include text-style(var(--font-family-thirdary), 600, 28px, normal, var(--sixth-color));
+
           margin: 0;
         }
 
         select {
-          font-family: Manrope, sans-serif;
-          font-weight: 600;
-          font-size: 19px;
+          @include text-style(var(--font-family-thirdary), 600, 19px, normal, var(--sixth-color));
+
           letter-spacing: 0.6px;
-          color: #1a202c;
-          padding: 12px 18px;
           background: #fafafa;
           border-radius: 13px;
+          padding: 12px 18px;
           cursor: pointer;
-
         }
       }
 
       .info {
         li {
+          @include flex-center(true,true);
+
           position: relative;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-          align-items: center;
           border: 1px solid #edf2f7;
           border-radius: 19px;
           padding: 25px 25px 55px;
@@ -678,37 +535,28 @@
           }
 
           .wrapper {
-            display: flex;
-            align-items: center;
+            @include flex-center(false);
 
             .about {
               margin-left: 15px;
-              font-family: Manrope, sans-serif;
               letter-spacing: 0.6px;
 
               h4 {
-                font-weight: 600;
-                font-size: 19px;
-                color: #1A202C;
+                @include text-style(var(--font-family-thirdary), 600, 19px, normal, var(--sixth-color));
+
                 margin: 0 0 7px;
               }
 
               p {
-                font-weight: 500;
-                font-size: 16px;
-                color: #A0AEC0;
+                @include text-style(var(--font-family-thirdary), 500, 16px, normal, var(--seventh-color));
+
                 margin: 0;
               }
             }
-
-
           }
 
           .price {
-            font-family: Manrope, sans-serif;
-            font-weight: 600;
-            font-size: 22px;
-            color: #1a202c;
+            @include text-style(var(--font-family-thirdary), 600, 22px, normal, var(--sixth-color));
           }
         }
       }
@@ -717,23 +565,17 @@
 }
 
 .cancelled {
-  color: #fb461d !important;
+  color: var(--red) !important;
 }
 
 .delivered {
-  color: #309d5c !important;
+  color: var(--green) !important;
 }
-
-
 
 .graphPurple {
   &::before {
-    content: "";
-    position: absolute;
-    bottom: 25px;
-    left: 25px;
-    right: 25px;
-    height: 9.42px;
+    @include pseudo-element(auto, 25px, 25px, 25px, auto, 9.42px);
+
     border-radius: 78px;
     background-color: var(--primary-color);
     opacity: 0.2;
@@ -748,26 +590,13 @@
     background-color: #f4f0ff;
 
     &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 25px;
-      height: 25px;
-      transform: translate(-50%, -50%);
-      background-size: cover;
-      background: url('../../../shared/assets/images/wallet.svg') top center no-repeat;
+      @include pseudo-element(25%,auto, auto, 25%,  25px, 25px, '../../../shared/assets/images/wallet.svg', translate(-50%, -50%));
     }
   }
 
   &::after {
-    width: 70%;
-    content: "";
-    position: absolute;
-    bottom: 25px;
-    left: 25px;
-    right: 25px;
-    height: 9.42px;
+    @include pseudo-element(auto, 25px, 25px, 25px,  70%, 9.42px);
+
     border-radius: 78px;
     background-color: var(--primary-color);
   }
@@ -775,12 +604,8 @@
 
 .graphYellow {
   &::before {
-    content: "";
-    position: absolute;
-    bottom: 25px;
-    left: 25px;
-    right: 25px;
-    height: 9.42px;
+    @include pseudo-element(auto, 25px, 25px, 25px, auto, 9.42px);
+
     border-radius: 78px;
     background-color: #fbac18;
     opacity: 0.2;
@@ -795,26 +620,13 @@
     background-color: #f2fdf6;
 
     &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 25px;
-      height: 25px;
-      transform: translate(-50%, -50%);
-      background-size: cover;
-      background: url('../../../shared/assets/images/money.svg') top center no-repeat;
+      @include pseudo-element(25%, auto, auto, 25%,  25px, 25px, '../../../shared/assets/images/money.svg',translate(-50%, -50%));
     }
   }
 
   &::after {
-    width: 40%;
-    content: "";
-    position: absolute;
-    bottom: 25px;
-    left: 25px;
-    right: 25px;
-    height: 9.42px;
+    @include pseudo-element(auto, 25px, 25px, 25px,  40%, 9.42px);
+
     border-radius: 78px;
     background-color: #fbac18;
   }
@@ -831,22 +643,13 @@
     position: relative;
 
     &::after {
-      content: "";
-      position: absolute;
-      top: 30%;
-      right: 5%;
-      width: 274px;
-      height: 276px;
-      background: url('../../../shared/assets/images/food-1.svg') top center no-repeat;
-      background-size: cover;
+      @include pseudo-element(30%, 5%, auto, auto, 274px, 276px, '../../../shared/assets/images/food-1.svg');
     }
 
     h2 {
-      font-family: Poppins, sans-serif;
+      @include text-style(var(--font-family-main), 800, 70px, normal, #fff);
+
       text-transform: uppercase;
-      font-weight: 800;
-      font-size: 70px;
-      color: #fff;
       margin: 0 0 20px;
     }
 
@@ -855,16 +658,14 @@
       position: relative;
 
       input {
+        @include text-style(var(--font-family-main), 800, 16px, normal, #878787);
+
         width: 440px;
         height: 68px;
         background: #fff;
         box-shadow: 0 7px 45px rgb(0 0 0 / 10%);
         border: none;
         border-radius: 14px;
-        font-family: Poppins, sans-serif;
-        font-size: 16px;
-        letter-spacing: 0.03em;
-        color: #878787;
         padding-left: 20px;
       }
 
@@ -883,26 +684,22 @@
   background-color: #eaeaea;
 
   .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex-center;
+
     padding-bottom: 40px;
     border-bottom: 1px solid #cbcbcb;
     margin-bottom: 50px;
 
     a {
-      display: flex;
-      align-items: center;
+      @include flex-center(false);
 
       img {
         @include img-style;
       }
 
       span {
-        font-family: Poppins, sans-serif;
-        font-weight: 600;
-        font-size: 21px;
-        color: var(--primary-color);
+        @include text-style(var(--font-family-main), 600, 21px, normal, var(--primary-color));
+
         margin-left: 5px;
       }
     }
@@ -912,10 +709,8 @@
 
       li {
         a {
-          font-family: Inter, sans-serif;
-          font-weight: 500;
-          font-size: 18px;
-          color: #606060;
+          @include text-style(var(--font-family-secondary), 500, 18px, normal, var(--secondary-color));
+
           transition: color 0.2s ease;
         }
 
@@ -923,20 +718,15 @@
           margin-right: 30px;
         }
       }
-
     }
   }
 
   .bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex-center;
 
     p {
-      font-family: Inter, sans-serif;
-      font-weight: 500;
-      font-size: 17px;
-      color: #999;
+      @include text-style(var(--font-family-secondary), 500, 17px, normal, #999);
+
       margin: 0;
     }
 
@@ -950,4 +740,47 @@
       }
     }
   }
+}
+
+// TODO: ??
+.view {
+  text-align: right;
+
+  a {
+    @include text-style(var(--font-family-main), 500, 20px, normal, var(--fourth-color));
+
+    margin-right: 5px;
+
+    svg {
+      margin-left: 5px;
+      width: 19px;
+      height: 19px;
+      stroke: #acadb9;
+      fill: none;
+    }
+  }
+}
+
+.tag {
+  @include text-style(var(--font-family-main), 500, 12px, normal, auto);
+
+  max-width: fit-content;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 4px 8px;
+}
+
+.red {
+  color: var(--red);
+  background-color: var(--red-bg);
+}
+
+.yellow {
+  color: var(--yellow);
+  background-color: var(--yellow-bg);
+}
+
+.green {
+  color: var(--green);
+  background-color: var(--green-bg);
 }
